@@ -1,4 +1,4 @@
-export type GameCategory = 'All' | 'Puzzle' | 'Arcade' | 'Memory' | 'Strategy' | 'Reflex';
+export type GameCategory = 'All' | 'Puzzle' | 'Arcade' | 'Memory' | 'Strategy' | 'Reflex' | 'Word';
 
 export interface GameControlInfo {
   device: 'Keyboard' | 'Touch / Mouse' | 'Keyboard / Button' | 'Any Device';
@@ -10,7 +10,7 @@ export interface GameInfo {
   id: string;
   slug: string;
   title: string;
-  category: 'Puzzle' | 'Arcade' | 'Memory' | 'Strategy' | 'Reflex';
+  category: 'Puzzle' | 'Arcade' | 'Memory' | 'Strategy' | 'Reflex' | 'Word';
   shortDescription: string;
   description: string;
   tagline: string;

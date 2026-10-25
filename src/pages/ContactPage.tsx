@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Send, CheckCircle2, User, HelpCircle, Sparkles } from 'lucide-react';
+import { Mail, MessageSquare, Send, CheckCircle2, User, HelpCircle, Sparkles, Instagram, ExternalLink } from 'lucide-react';
 import { sound } from '../utils/audio';
+
+const DEFAULT_AVATAR = '/assets/aistudio/20250326_100301_1__c7089703.jpg';
+const INSTAGRAM_URL = 'https://www.instagram.com/shahanurmollah__?exln=MTl6cTdzMmwyYWx3dA==';
 
 export const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +27,18 @@ export const ContactPage: React.FC = () => {
       localStorage.setItem('qivlix_contact_submissions', JSON.stringify(existing));
     } catch {}
   };
+
+  const [avatar] = useState<string>(() => {
+    try {
+      const stored = localStorage.getItem('qivlix_creator_avatar');
+      if (stored && (stored.includes('shahanur_mollah_portrait') || stored.includes('Screenshot_20261025'))) {
+        return DEFAULT_AVATAR;
+      }
+      return stored || DEFAULT_AVATAR;
+    } catch {
+      return DEFAULT_AVATAR;
+    }
+  });
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -136,18 +151,58 @@ export const ContactPage: React.FC = () => {
 
         {/* Info Column */}
         <div className="md:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
-            <h3 className="font-display font-bold text-base text-slate-100 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-cyan-400" />
-              Creator Information
-            </h3>
+          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
+            <div className="flex items-center gap-3">
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="Shahanur Mollah"
+                  className="w-12 h-12 rounded-xl object-cover border border-cyan-500/40 shadow-md shadow-cyan-500/10"
+                />
+              ) : (
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-400 to-purple-500 p-0.5 shadow-md shadow-purple-500/10">
+                  <div className="w-full h-full rounded-[10px] bg-[#0b101e] flex items-center justify-center font-display font-black text-sm text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+                    SM
+                  </div>
+                </div>
+              )}
+              <div>
+                <h3 className="font-display font-bold text-base text-slate-100">
+                  Creator Profile
+                </h3>
+                <div className="text-xs font-mono text-cyan-400 font-medium">Shahanur Mollah</div>
+              </div>
+            </div>
+
             <p className="text-xs text-slate-400 leading-relaxed">
               Qivlix is maintained and updated directly by creator <span className="text-slate-200 font-semibold">Shahanur Mollah</span>.
             </p>
             <div className="pt-2 text-xs space-y-1.5 font-mono text-slate-300">
               <div>Creator: <span className="text-cyan-400 font-medium">Shahanur Mollah</span></div>
+              <div>Email: <a href="mailto:shahanurmollah1@gmail.com" className="text-cyan-400 hover:underline">shahanurmollah1@gmail.com</a></div>
               <div>Platform: <span className="text-purple-400">Qivlix</span></div>
-              <div>Status: <span className="text-emerald-400">All 6 Systems Operational</span></div>
+              <div>Status: <span className="text-emerald-400">All 10 Systems Operational</span></div>
+            </div>
+
+            <div className="pt-2 flex flex-col gap-2">
+              <a
+                href="mailto:shahanurmollah1@gmail.com"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 hover:text-cyan-200 text-xs font-semibold shadow-md shadow-cyan-500/10 transition-all cursor-pointer group"
+              >
+                <Mail className="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span>Email: shahanurmollah1@gmail.com</span>
+              </a>
+
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 hover:from-pink-500/30 hover:to-indigo-500/30 border border-pink-500/40 text-pink-300 hover:text-pink-200 text-xs font-semibold shadow-md shadow-pink-500/10 transition-all cursor-pointer group"
+              >
+                <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
+                <span>Instagram (@shahanurmollah__)</span>
+                <ExternalLink className="w-3 h-3 text-pink-400/80" />
+              </a>
             </div>
           </div>
 

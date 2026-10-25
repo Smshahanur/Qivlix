@@ -165,7 +165,122 @@ export const GAMES: GameInfo[] = [
       'Maintain soft peripheral focus rather than staring intensely at one pixel.',
       'Ensure your screen refresh rate is at its highest setting for optimal accuracy.'
     ]
+  },
+  {
+    id: 'cyber-sweeper',
+    slug: 'cyber-sweeper',
+    title: 'Cyber Sweeper',
+    category: 'Puzzle',
+    tagline: 'Deactivate hidden matrix data mines using pure tactical deduction.',
+    shortDescription: 'High-voltage cyberpunk minesweeper with safe first click and chording.',
+    description: 'Matrix security grid has armed explosive data nodes across the cyber matrix. Deduce node locations using numerical radar hints, place digital disarm flags, and clear all safe sectors. Features Novice (9x9), Hacker (16x16), and Master (16x30) tiers, mobile-optimized Flag Mode, chording shortcuts, and best time tracking.',
+    thumbnail: '/src/assets/images/game_cyber_sweeper.svg',
+    badge: 'Logic Classic',
+    color: 'cyan',
+    controls: [
+      { device: 'Touch / Mouse', keys: 'Left Click / Tap', action: 'Reveal cell (or flag in Flag Mode)' },
+      { device: 'Touch / Mouse', keys: 'Right Click / Long Press', action: 'Place or remove disarm flag' },
+      { device: 'Touch / Mouse', keys: 'Double Tap / Double Click', action: 'Chord reveal surrounding neighbors when flags match number' },
+      { device: 'Keyboard / Button', keys: 'Flag Mode Button', action: 'Toggle between Dig and Flagging actions on mobile' }
+    ],
+    rules: [
+      'The first cell clicked is always 100% guaranteed safe with an open perimeter.',
+      'Numbers indicate precisely how many mines touch that specific cell (1 through 8).',
+      'Flag suspected mines to safeguard yourself from accidental detonation.',
+      'Clear every non-mine cell on the grid to achieve victory and set a record time.'
+    ],
+    tips: [
+      'Look for 1s on corners: their only adjacent unrevealed neighbor is guaranteed to be a mine.',
+      'Toggle Flag Mode on mobile touchscreens to flag quickly without long-pressing.',
+      'Use double-click chording on completed numbers to clear large swathes instantly.'
+    ]
+  },
+  {
+    id: 'neon-breakout',
+    slug: 'neon-breakout',
+    title: 'Neon Breakout',
+    category: 'Arcade',
+    tagline: 'Shatter cybernetic brick matrices with high-energy deflections and laser cannons.',
+    shortDescription: 'Dynamic 60fps brick breaker with multi-ball, laser paddle, and multi-tier stages.',
+    description: 'Pilot an electric deflector platform to shatter glowing neon energy prisms. Collect falling power cores to trigger Multi-Ball splitters, wide-field paddles, laser cannons, and spare shields. Face three increasingly intense sectors with multi-hit reinforced bricks and particle explosions.',
+    thumbnail: '/src/assets/images/game_neon_breakout.svg',
+    badge: 'Arcade Action',
+    color: 'purple',
+    controls: [
+      { device: 'Touch / Mouse', keys: 'Drag / Move Pointer', action: 'Directly steer deflector paddle horizontally' },
+      { device: 'Keyboard', keys: 'Arrow Keys / A & D', action: 'Precision left and right paddle steering' },
+      { device: 'Keyboard / Button', keys: 'Spacebar / Laser Button', action: 'Fire twin laser cannons when armed with laser power-up' },
+      { device: 'Keyboard', keys: 'P', action: 'Pause or resume game simulation' }
+    ],
+    rules: [
+      'Keep the high-voltage energy balls from dropping below your lower shield.',
+      'Bounce angles adjust based on where the ball strikes your paddle—center shoots straight, edges angle sharply.',
+      'Some reinforced bricks require multiple impacts to shatter.',
+      'Collect falling power capsules to gain laser firing capability, paddle expansions, and multi-balls.'
+    ],
+    tips: [
+      'Strike balls with the extreme edges of the paddle to create sharp angles that penetrate behind brick clusters.',
+      'Laser power-up allows you to blast stubborn bricks directly from afar.',
+      'Multi-ball triples your score acquisition rate—keep as many in play as possible.'
+    ]
+  },
+  {
+    id: 'cyber-flap',
+    slug: 'cyber-flap',
+    title: 'Cyber Flap',
+    category: 'Reflex',
+    tagline: 'Pulse engine thrusters and navigate your cyber drone through high-voltage energy pylons.',
+    shortDescription: 'Intense one-touch reflex flyer with fluid particle thrusters and medal tiers.',
+    description: 'Test your motor rhythm and spatial precision in Cyber Flap. Pulse your miniature drone’s ion thrusters to weave cleanly between electrified energy pylons. Single-tap flight mechanics paired with strict physics and medal progression (Bronze, Silver, Gold, Cyber Elite) deliver endless addictive replayability.',
+    thumbnail: '/src/assets/images/game_cyber_flap.svg',
+    badge: 'Addictive',
+    color: 'cyan',
+    controls: [
+      { device: 'Touch / Mouse', keys: 'Tap / Click Anywhere', action: 'Pulse ion thrusters for upward impulse' },
+      { device: 'Keyboard', keys: 'Spacebar / Arrow Up / W', action: 'Instantly fire thrusters with mechanical switch precision' }
+    ],
+    rules: [
+      'Gravity pulls your drone downward continuously.',
+      'Each tap or spacebar press fires a short upward thruster burst.',
+      'Passing between a pair of neon pylons awards 1 score point.',
+      'Colliding with any pylon, the ceiling, or the electrified floor terminates flight.'
+    ],
+    tips: [
+      'Establish a gentle, steady cadence of short taps rather than waiting until you fall low.',
+      'Focus your vision 1-2 pylons ahead rather than directly on the drone.',
+      'Spacebar provides the crispest physical feedback for higher scores.'
+    ]
+  },
+  {
+    id: 'cyber-wordle',
+    slug: 'cyber-wordle',
+    title: 'Cyber Wordle',
+    category: 'Word',
+    tagline: 'Crack the encrypted 5-letter security cipher within 6 tactical attempts.',
+    shortDescription: 'Matrix password decrypter with color-coded hints and unlimited play.',
+    description: 'Infiltrate terminal mainframes by deducing the secret 5-letter cipher code. Each guess gives cryptographic feedback: Emerald indicates correct letter in the right slot, Amber means letter is in the code but elsewhere, and Dark Slate eliminates characters. Track your win streaks and play unlimited rounds.',
+    thumbnail: '/src/assets/images/game_cyber_wordle.svg',
+    badge: 'Word Master',
+    color: 'emerald',
+    controls: [
+      { device: 'Touch / Mouse', keys: 'Tap Virtual Keyboard', action: 'Input letters, backspace, and submit guesses' },
+      { device: 'Keyboard', keys: 'Physical A-Z / Enter / Backspace', action: 'Full mechanical typing support' },
+      { device: 'Keyboard / Button', keys: 'New Word', action: 'Generate fresh encrypted password at any time' }
+    ],
+    rules: [
+      'You have 6 attempts to crack the secret 5-letter code word.',
+      'Each guess must be a valid 5-letter word.',
+      'Green/Emerald: Letter is in the exact right position.',
+      'Yellow/Amber: Letter exists in the word but belongs in another slot.',
+      'Dark Grey: Letter does not appear in the target cipher.'
+    ],
+    tips: [
+      'Start with vowel-heavy words like AUDIO, CYBER, or QUEST to eliminate letters early.',
+      'Take note of the color-coded virtual keyboard to see which keys remain viable.',
+      'Letters can appear more than once in the target word!'
+    ]
   }
 ];
 
-export const CATEGORIES: GameCategory[] = ['All', 'Puzzle', 'Arcade', 'Memory', 'Strategy', 'Reflex'];
+export const CATEGORIES: GameCategory[] = ['All', 'Puzzle', 'Arcade', 'Memory', 'Strategy', 'Reflex', 'Word'];
+

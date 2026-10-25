@@ -72,14 +72,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectGame, onOpenSearch }
                   className="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 font-semibold text-sm border border-slate-700/80 transition-colors flex items-center gap-2 cursor-pointer"
                 >
                   <Gamepad2 className="w-4 h-4 text-purple-400" />
-                  <span>Browse All 6 Games</span>
+                  <span>Browse All {GAMES.length} Games</span>
                 </button>
               </div>
 
               {/* Key Platform Stats (Zero Pill Rule: unboxed typography) */}
               <div className="pt-4 border-t border-slate-800/80 grid grid-cols-3 gap-4 max-w-md text-left">
                 <div>
-                  <div className="text-2xl font-black font-mono text-cyan-400 tabular-nums">6</div>
+                  <div className="text-2xl font-black font-mono text-cyan-400 tabular-nums">{GAMES.length}</div>
                   <div className="text-xs text-slate-400">Playable Games</div>
                 </div>
                 <div>

@@ -25,6 +25,10 @@ import { MemoryMatchGame } from '../components/games/MemoryMatchGame';
 import { TicTacToeGame } from '../components/games/TicTacToeGame';
 import { NumberMergeGame } from '../components/games/NumberMergeGame';
 import { ReactionTestGame } from '../components/games/ReactionTestGame';
+import { CyberSweeperGame } from '../components/games/CyberSweeperGame';
+import { NeonBreakoutGame } from '../components/games/NeonBreakoutGame';
+import { CyberFlapGame } from '../components/games/CyberFlapGame';
+import { CyberWordleGame } from '../components/games/CyberWordleGame';
 
 interface GameDetailPageProps {
   slug: string;
@@ -80,6 +84,14 @@ export const GameDetailPage: React.FC<GameDetailPageProps> = ({ slug, onNavigate
         return <NumberMergeGame />;
       case 'reaction-test':
         return <ReactionTestGame />;
+      case 'cyber-sweeper':
+        return <CyberSweeperGame />;
+      case 'neon-breakout':
+        return <NeonBreakoutGame />;
+      case 'cyber-flap':
+        return <CyberFlapGame />;
+      case 'cyber-wordle':
+        return <CyberWordleGame />;
       default:
         return <BlockPuzzleGame />;
     }

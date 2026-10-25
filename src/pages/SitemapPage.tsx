@@ -27,7 +27,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate }) => {
           <div className="flex items-center gap-2 mb-4 text-cyan-400">
             <Gamepad2 className="w-5 h-5" />
             <h2 className="font-display font-bold text-base text-slate-100">
-              Browser Games (6)
+              Browser Games ({GAMES.length})
             </h2>
           </div>
           <ul className="space-y-3 text-xs">
