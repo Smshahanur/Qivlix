@@ -1,0 +1,6 @@
+{
+  "name": "Qivlix",
+  "description": "Free online browser games by Shahanur Mollah. Play Beyond Limits with Block Puzzle, Cyber Snake, Memory Match, Tic-Tac-Toe AI, Number Merge, and Reaction Test.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

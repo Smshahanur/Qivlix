@@ -1,0 +1,5 @@
+# Qivlix Robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://qivlix.vercel.app/sitemap.xml
