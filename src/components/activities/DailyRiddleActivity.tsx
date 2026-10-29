@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { sound } from '../../utils/audio';
 import { RIDDLES } from '../../data/playgroundContent';
-import { recordActivityCompletion } from '../../utils/progression';
+import { recordActivityCompletion, getStoredProfile } from '../../utils/progression';
+import { getDailyRiddleIndex } from '../../utils/dailySystem';
 import { HelpCircle, RotateCcw, ArrowLeft, CheckCircle2, Sparkles, Lightbulb, Eye } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -11,18 +12,33 @@ interface DailyRiddleProps {
 }
 
 export const DailyRiddleActivity: React.FC<DailyRiddleProps> = ({ onBack, isDaily }) => {
-  const [riddleIdx, setRiddleIdx] = useState<number>(0);
+  const [riddleIdx, setRiddleIdx] = useState<number>(() => getDailyRiddleIndex());
   const [userAnswer, setUserAnswer] = useState<string>('');
   const [hintLevel, setHintLevel] = useState<number>(0);
   const [isSolved, setIsSolved] = useState<boolean>(false);
   const [isRevealed, setIsRevealed] = useState<boolean>(false);
+  const [awardedXp, setAwardedXp] = useState<number | null>(null);
   const [feedback, setFeedback] = useState<{ isError: boolean; message: string } | null>(null);
+  const hasSubmittedRef = useRef<boolean>(false);
 
   const currentRiddle = RIDDLES[riddleIdx % RIDDLES.length];
 
+  // Check if current riddle was previously solved
+  useEffect(() => {
+    const profile = getStoredProfile();
+    if (profile.personalBests[currentRiddle.id] !== undefined) {
+      setIsSolved(true);
+      setAwardedXp(0);
+    } else {
+      setIsSolved(false);
+      setAwardedXp(null);
+    }
+    hasSubmittedRef.current = false;
+  }, [currentRiddle.id]);
+
   const handleCheckAnswer = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSolved || isRevealed) return;
+    if (isSolved || isRevealed || hasSubmittedRef.current) return;
 
     const cleaned = userAnswer.trim().toLowerCase();
     if (!cleaned) return;
@@ -33,13 +49,14 @@ export const DailyRiddleActivity: React.FC<DailyRiddleProps> = ({ onBack, isDail
     });
 
     if (isMatch) {
+      hasSubmittedRef.current = true;
       setIsSolved(true);
       setFeedback(null);
       sound.playVictory();
       confetti({ particleCount: 35, spread: 60, origin: { y: 0.6 } });
 
       const points = hintLevel === 0 ? currentRiddle.points : Math.max(15, currentRiddle.points - hintLevel * 10);
-      recordActivityCompletion({
+      const res = recordActivityCompletion({
         activityId: currentRiddle.id,
         activityTitle: `Riddle: ${currentRiddle.title}`,
         type: 'riddle',
@@ -49,6 +66,7 @@ export const DailyRiddleActivity: React.FC<DailyRiddleProps> = ({ onBack, isDail
         isDailyPortal: isDaily,
         isMystery: true,
       });
+      setAwardedXp(res.pointsAwarded);
     } else {
       sound.playGameOver();
       setFeedback({
@@ -196,11 +214,18 @@ export const DailyRiddleActivity: React.FC<DailyRiddleProps> = ({ onBack, isDail
           </form>
         ) : (
           <div className="p-5 rounded-2xl bg-slate-950/80 border border-emerald-500/30 space-y-4 animate-fadeIn">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-              <span className="text-sm font-bold text-white">
-                Solution: <span className="text-emerald-300 capitalize">{currentRiddle.answers[0]}</span>
-              </span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                <span className="text-sm font-bold text-white">
+                  Solution: <span className="text-emerald-300 capitalize">{currentRiddle.answers[0]}</span>
+                </span>
+              </div>
+              {awardedXp !== null && (
+                <span className="text-xs font-mono font-bold text-amber-400">
+                  {awardedXp > 0 ? `+${awardedXp} XP Awarded` : 'Already Decrypted (+0 XP)'}
+                </span>
+              )}
             </div>
 
             <div className="text-xs sm:text-sm text-slate-300 leading-relaxed">

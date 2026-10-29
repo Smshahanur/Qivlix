@@ -22,6 +22,18 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
   }, [selectedDate]);
 
   const todayStr = getTodayDateStr();
+
+  // Check for midnight date rollover every 30 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const currentToday = getTodayDateStr();
+      if (selectedDate === todayStr && currentToday !== todayStr) {
+        setSelectedDate(currentToday);
+      }
+    }, 30000);
+    return () => clearInterval(timer);
+  }, [selectedDate, todayStr]);
+
   const dayProgress = profile.dailyCompletions[selectedDate] || {
     completedActivityIds: [],
     mysteryCompleted: false,
@@ -52,10 +64,12 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
             <span>Deterministic Portal</span>
             <span aria-hidden="true">·</span>
             <span>{dailyData.formattedDate}</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span className="text-slate-400">Local Timezone (Midnight Rollover)</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">The Daily Portal</h1>
           <p className="text-sm text-slate-300 mt-1 max-w-xl">
-            Synchronized daily challenges refreshed every midnight. Complete today’s three activities to preserve your streak and earn bonus progression.
+            Synchronized daily challenges refreshed every midnight in your local timezone. Refreshing never alters today's activities. Complete all three to preserve your streak!
           </p>
         </div>
 

@@ -131,7 +131,7 @@ const ACTIVITY_POOL_2: DailyActivityItem[] = [
     targetPath: '/game/number-merge',
   },
   {
-    id: 'sweeper',
+    id: 'cyber-sweeper',
     type: 'game',
     title: 'Cyber Sweeper',
     subtitle: 'Defuse data mines without triggering glitch',
@@ -140,7 +140,7 @@ const ACTIVITY_POOL_2: DailyActivityItem[] = [
     pointsReward: 50,
     iconName: 'ShieldAlert',
     color: 'emerald',
-    targetPath: '/game/sweeper',
+    targetPath: '/game/cyber-sweeper',
   },
 ];
 
@@ -170,7 +170,7 @@ const ACTIVITY_POOL_3: DailyActivityItem[] = [
     targetPath: '/activity/daily-riddle',
   },
   {
-    id: 'wordle',
+    id: 'cyber-wordle',
     type: 'game',
     title: 'Cyber Wordle',
     subtitle: 'Crack the 5-letter access passcode',
@@ -179,7 +179,7 @@ const ACTIVITY_POOL_3: DailyActivityItem[] = [
     pointsReward: 60,
     iconName: 'Terminal',
     color: 'cyan',
-    targetPath: '/game/wordle',
+    targetPath: '/game/cyber-wordle',
   },
 ];
 
@@ -276,3 +276,22 @@ export function getDailyChallenge(dateStr?: string): DailyChallengeData {
     activities: [act1, act2, act3],
   };
 }
+
+/**
+ * Timezone Strategy:
+ * Daily challenges and calendar dates are synchronized to the visitor's Local Device Timezone.
+ * Each calendar date (YYYY-MM-DD) deterministically produces the exact same activities,
+ * weekly theme, and mystery for all visits on that date. Rollover occurs naturally at 00:00 midnight.
+ */
+export const DAILY_TIMEZONE_STRATEGY = 'Visitor Local Device Timezone (Midnight 00:00 Rollover)';
+
+export function getDailyRiddleIndex(dateStr?: string): number {
+  const hash = hashString(dateStr || getTodayDateStr());
+  return (hash >> 3) % RIDDLES.length;
+}
+
+export function getDailyMysteryPictureIndex(dateStr?: string): number {
+  const hash = hashString(dateStr || getTodayDateStr());
+  return (hash >> 3) % MYSTERY_PICTURES.length;
+}
+

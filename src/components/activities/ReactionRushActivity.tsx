@@ -21,6 +21,7 @@ export const ReactionRushActivity: React.FC<ReactionRushProps> = ({ onBack, isDa
 
   const startTimeRef = useRef<number>(0);
   const timerTimeoutRef = useRef<number | null>(null);
+  const sessionCompletedRef = useRef<boolean>(false);
 
   // Load personal best
   useEffect(() => {
@@ -86,25 +87,21 @@ export const ReactionRushActivity: React.FC<ReactionRushProps> = ({ onBack, isDa
       const newAttempts = [elapsed, ...attempts].slice(0, 5);
       setAttempts(newAttempts);
 
-      // Best time
-      let newBest = bestTime;
-      if (!bestTime || elapsed < bestTime) {
-        newBest = elapsed;
+      // Best time check and anti-spam XP calculation
+      let points = 0;
+      const isRecordBeaten = !bestTime || elapsed < bestTime;
+
+      if (isRecordBeaten) {
         setBestTime(elapsed);
+        points = bestTime ? 30 : 50; // New record bonus, or first time record
         confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 } });
+      } else if (!sessionCompletedRef.current) {
+        points = 25; // First completion in session
+        sessionCompletedRef.current = true;
       }
 
-      // Calculate points
-      let points = 25;
-      if (elapsed < 200) points = 100;
-      else if (elapsed < 240) points = 80;
-      else if (elapsed < 300) points = 60;
-      else if (elapsed < 380) points = 40;
-
-      setEarnedPoints(points);
-
       // Save progression
-      recordActivityCompletion({
+      const res = recordActivityCompletion({
         activityId: 'reaction-rush',
         activityTitle: 'Reaction Rush',
         type: 'activity',
@@ -113,6 +110,8 @@ export const ReactionRushActivity: React.FC<ReactionRushProps> = ({ onBack, isDa
         score: elapsed,
         isDailyPortal: isDaily,
       });
+
+      setEarnedPoints(res.pointsAwarded);
       setJustCompleted(true);
     }
 
@@ -244,7 +243,12 @@ export const ReactionRushActivity: React.FC<ReactionRushProps> = ({ onBack, isDa
 
             {justCompleted && (
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs">
-                <CheckCircle2 className="w-4 h-4" /> +{earnedPoints} XP recorded to your collection!
+                <CheckCircle2 className="w-4 h-4" />
+                <span>
+                  {earnedPoints > 0
+                    ? `+${earnedPoints} XP recorded to your vault!`
+                    : `Attempt logged! Beat your ${bestTime} ms best for bonus XP.`}
+                </span>
               </div>
             )}
 

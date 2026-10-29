@@ -73,7 +73,7 @@ export function computeStreak(lastDate: string, currentStreak: number, todayStr:
   return currentStreak || 1;
 }
 
-// Award points, check badges, and record activity
+// Award points, check badges, and record activity with strict anti-duplication
 export function recordActivityCompletion(params: {
   activityId: string;
   activityTitle: string;
@@ -84,61 +84,84 @@ export function recordActivityCompletion(params: {
   isDailyPortal?: boolean;
   dateStr?: string;
   isMystery?: boolean;
-}): { newBadges: AchievementBadge[]; updatedProfile: UserProfile } {
+}): { newBadges: AchievementBadge[]; updatedProfile: UserProfile; pointsAwarded: number } {
   const profile = getStoredProfile();
-  const todayStr = params.dateStr || new Date().toISOString().slice(0, 10);
 
-  // Update streak
+  // Consistent local calendar day (YYYY-MM-DD)
+  const now = new Date();
+  const localToday = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  const todayStr = params.dateStr || localToday;
+
+  // Update streak safely
   const newStreak = computeStreak(profile.lastActiveDate, profile.streak, todayStr);
   profile.streak = newStreak;
   profile.lastActiveDate = todayStr;
 
-  // Add points
-  profile.points = (profile.points || 0) + params.pointsEarned;
+  let pointsToAward = 0;
+  let isNewPersonalBest = false;
+
+  // Evaluate Daily Portal status
+  const currentDay = profile.dailyCompletions[todayStr] || {
+    completedActivityIds: [],
+    mysteryCompleted: false,
+    allCompleted: false,
+  };
+
+  const isAlreadyDailyCompleted = currentDay.completedActivityIds.includes(params.activityId);
+  const isAlreadyMysteryCompleted = params.isMystery && currentDay.mysteryCompleted;
+
+  if (params.isDailyPortal || params.isMystery) {
+    if (!isAlreadyDailyCompleted && (!params.isMystery || !isAlreadyMysteryCompleted)) {
+      pointsToAward += params.pointsEarned;
+    }
+    if (params.isMystery) {
+      currentDay.mysteryCompleted = true;
+    }
+    if (!currentDay.completedActivityIds.includes(params.activityId)) {
+      currentDay.completedActivityIds.push(params.activityId);
+    }
+    if (currentDay.completedActivityIds.length >= 3) {
+      currentDay.allCompleted = true;
+    }
+    profile.dailyCompletions[todayStr] = currentDay;
+  } else if (params.type === 'riddle') {
+    // Riddles: Award XP only if not solved previously
+    const alreadySolved = profile.personalBests[params.activityId] !== undefined;
+    if (!alreadySolved) {
+      pointsToAward += params.pointsEarned;
+    }
+  } else {
+    // Standard arcade game / activity session
+    // Award session XP (capped legitimately)
+    pointsToAward += Math.max(0, Math.min(params.pointsEarned, 150));
+  }
 
   // Record personal best if score provided
   if (params.score !== undefined) {
     const currentBest = profile.personalBests[params.activityId];
-    // For reaction test/rush, lower is better. For others, higher is better
     const isReaction = params.activityId.includes('reaction');
     if (currentBest === undefined) {
       profile.personalBests[params.activityId] = params.score;
+      isNewPersonalBest = true;
     } else {
       if (isReaction) {
         if (params.score < currentBest) {
           profile.personalBests[params.activityId] = params.score;
+          isNewPersonalBest = true;
+          pointsToAward += 25; // Bonus for setting new personal best
         }
       } else {
         if (params.score > currentBest) {
           profile.personalBests[params.activityId] = params.score;
+          isNewPersonalBest = true;
+          pointsToAward += 25; // Bonus for setting new high score
         }
       }
     }
   }
 
-  // Update daily completion record if part of daily portal
-  if (params.isDailyPortal) {
-    const currentDay = profile.dailyCompletions[todayStr] || {
-      completedActivityIds: [],
-      mysteryCompleted: false,
-      allCompleted: false,
-    };
-
-    if (params.isMystery) {
-      currentDay.mysteryCompleted = true;
-    }
-
-    if (!currentDay.completedActivityIds.includes(params.activityId)) {
-      currentDay.completedActivityIds.push(params.activityId);
-    }
-
-    // Check if 3 activities completed
-    if (currentDay.completedActivityIds.length >= 3) {
-      currentDay.allCompleted = true;
-    }
-
-    profile.dailyCompletions[todayStr] = currentDay;
-  }
+  // Add calculated points
+  profile.points = (profile.points || 0) + pointsToAward;
 
   // Record recent activity (limit to 10)
   const existingIdx = profile.recentActivities.findIndex((a) => a.id === params.activityId);
@@ -216,7 +239,7 @@ export function recordActivityCompletion(params: {
   }
 
   saveProfile(profile);
-  return { newBadges: newlyUnlocked, updatedProfile: profile };
+  return { newBadges: newlyUnlocked, updatedProfile: profile, pointsAwarded: pointsToAward };
 }
 
 // Mark discovery as learned

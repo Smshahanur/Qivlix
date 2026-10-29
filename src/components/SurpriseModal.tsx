@@ -21,9 +21,9 @@ const SURPRISE_POOL: SurpriseOption[] = [
   { id: 'act-daily-riddle', title: 'Daily Riddle', category: 'Lateral Logic', tagline: 'Decipher today\'s poetic and philosophical riddle.', type: 'activity', path: '/activity/daily-riddle', color: 'from-amber-400 to-yellow-600' },
   { id: 'game-block-puzzle', title: 'Block Puzzle', category: 'Spatial Puzzle', tagline: 'Place neon polyominos and blast combo lines on the 10x10 matrix.', type: 'game', path: '/game/block-puzzle', color: 'from-cyan-400 to-blue-500' },
   { id: 'game-snake', title: 'Cyber Snake', category: 'Arcade Classic', tagline: 'Glide through the neon matrix, collect power cores, and grow.', type: 'game', path: '/game/snake', color: 'from-purple-400 to-fuchsia-600' },
-  { id: 'game-wordle', title: 'Cyber Wordle', category: 'Word Crypt', tagline: 'Crack the 5-letter access code within 6 tactical attempts.', type: 'game', path: '/game/wordle', color: 'from-emerald-400 to-teal-500' },
+  { id: 'game-wordle', title: 'Cyber Wordle', category: 'Word Crypt', tagline: 'Crack the 5-letter access code within 6 tactical attempts.', type: 'game', path: '/game/cyber-wordle', color: 'from-emerald-400 to-teal-500' },
   { id: 'game-number-merge', title: 'Quantum 2048', category: 'Strategy', tagline: 'Slide tiles and synthesize high-energy 2048 quantum elements.', type: 'game', path: '/game/number-merge', color: 'from-orange-500 to-amber-600' },
-  { id: 'game-breakout', title: 'Neon Breakout', category: 'Reflex Arcade', tagline: 'Deflect photonic spheres to shatter defensive cyber barriers.', type: 'game', path: '/game/breakout', color: 'from-rose-500 to-pink-600' },
+  { id: 'game-breakout', title: 'Neon Breakout', category: 'Reflex Arcade', tagline: 'Deflect photonic spheres to shatter defensive cyber barriers.', type: 'game', path: '/game/neon-breakout', color: 'from-rose-500 to-pink-600' },
   { id: 'disc-vault', title: 'Discovery Vault', category: 'Mind Exploration', tagline: 'Explore time dilation, acoustic ocean anomalies, and illusions.', type: 'discovery', path: '/discover', color: 'from-violet-500 to-purple-700' },
 ];
 

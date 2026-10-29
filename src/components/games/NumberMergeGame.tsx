@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { RotateCcw, Undo2, Trophy, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Award } from 'lucide-react';
 import { sound } from '../../utils/audio';
+import { recordActivityCompletion } from '../../utils/progression';
 
 type BoardGrid = number[][];
 
@@ -42,6 +43,7 @@ export const NumberMergeGame: React.FC = () => {
   const [keepPlaying, setKeepPlaying] = useState<boolean>(false);
 
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const hasRecordedRef = useRef<boolean>(false);
 
   // Spawn random 2 or 4 in empty cell
   const addRandomTile = useCallback((grid: BoardGrid): BoardGrid => {
@@ -60,6 +62,7 @@ export const NumberMergeGame: React.FC = () => {
 
   // Initialize game
   const initGame = useCallback(() => {
+    hasRecordedRef.current = false;
     let newGrid: BoardGrid = Array(BOARD_SIZE).fill(0).map(() => Array(BOARD_SIZE).fill(0));
     newGrid = addRandomTile(newGrid);
     newGrid = addRandomTile(newGrid);
@@ -193,6 +196,18 @@ export const NumberMergeGame: React.FC = () => {
       if (!canMove(nextBoard)) {
         setGameOver(true);
         sound.playGameOver();
+        if (!hasRecordedRef.current && nextScore >= 50) {
+          hasRecordedRef.current = true;
+          const sessionXp = Math.min(50, Math.floor(nextScore / 50));
+          recordActivityCompletion({
+            activityId: 'number-merge',
+            activityTitle: 'Quantum 2048 Merge',
+            type: 'game',
+            targetPath: '/game/number-merge',
+            pointsEarned: sessionXp,
+            score: nextScore,
+          });
+        }
       }
     },
     [board, gameOver, gameWon, keepPlaying, score, highScore, addRandomTile]
@@ -382,30 +397,34 @@ export const NumberMergeGame: React.FC = () => {
       {/* On-screen mobile direction buttons */}
       <div className="mt-4 flex flex-col items-center gap-1 sm:hidden">
         <button
+          onTouchStart={(e) => { e.preventDefault(); move('UP'); }}
           onClick={() => move('UP')}
-          className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+          className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
           aria-label="Slide Up"
         >
           <ArrowUp className="w-5 h-5" />
         </button>
         <div className="flex items-center gap-3">
           <button
+            onTouchStart={(e) => { e.preventDefault(); move('LEFT'); }}
             onClick={() => move('LEFT')}
-            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
             aria-label="Slide Left"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <button
+            onTouchStart={(e) => { e.preventDefault(); move('DOWN'); }}
             onClick={() => move('DOWN')}
-            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
             aria-label="Slide Down"
           >
             <ArrowDown className="w-5 h-5" />
           </button>
           <button
+            onTouchStart={(e) => { e.preventDefault(); move('RIGHT'); }}
             onClick={() => move('RIGHT')}
-            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
             aria-label="Slide Right"
           >
             <ArrowRight className="w-5 h-5" />

@@ -159,7 +159,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             );
           })}
 
-          <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 px-2">
+          <div className="pt-2">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenSurprise();
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 text-amber-300 font-bold text-xs cursor-pointer"
+            >
+              <Dices className="w-4 h-4 text-amber-400" />
+              <span>Surprise Me (Roll Random Activity)</span>
+            </button>
+          </div>
+
+          <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 px-2">
             <span>Audio Procedural FX:</span>
             <button
               onClick={toggleSound}

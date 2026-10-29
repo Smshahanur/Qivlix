@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Play, Pause, RotateCcw, Trophy, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Shield, Zap } from 'lucide-react';
 import { sound } from '../../utils/audio';
+import { recordActivityCompletion } from '../../utils/progression';
 
 type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 interface Point {
@@ -38,6 +39,7 @@ export const SnakeGame: React.FC = () => {
   const nextDirRef = useRef(nextDirection);
   nextDirRef.current = nextDirection;
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const hasRecordedRef = useRef<boolean>(false);
 
   // Spawn random food not overlapping snake
   const spawnFood = useCallback((currentSnake: Point[]): Point => {
@@ -53,8 +55,27 @@ export const SnakeGame: React.FC = () => {
     return newFood;
   }, []);
 
+  const handleGameOver = useCallback((finalScore: number) => {
+    setIsGameOver(true);
+    setIsPlaying(false);
+    sound.playGameOver();
+    if (!hasRecordedRef.current && finalScore >= 10) {
+      hasRecordedRef.current = true;
+      const sessionXp = Math.min(50, Math.floor(finalScore / 5));
+      recordActivityCompletion({
+        activityId: 'snake',
+        activityTitle: 'Cyber Snake',
+        type: 'game',
+        targetPath: '/game/snake',
+        pointsEarned: sessionXp,
+        score: finalScore,
+      });
+    }
+  }, []);
+
   // Reset Game
   const resetGame = useCallback(() => {
+    hasRecordedRef.current = false;
     const initialSnake = [
       { x: 10, y: 10 },
       { x: 10, y: 11 },
@@ -160,9 +181,7 @@ export const SnakeGame: React.FC = () => {
           if (head.y >= GRID_SIZE) head.y = 0;
         } else {
           if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE) {
-            setIsGameOver(true);
-            setIsPlaying(false);
-            sound.playGameOver();
+            handleGameOver(score);
             return prevSnake;
           }
         }
@@ -170,9 +189,7 @@ export const SnakeGame: React.FC = () => {
         // Self collision check
         const selfHit = prevSnake.some((seg) => seg.x === head.x && seg.y === head.y);
         if (selfHit) {
-          setIsGameOver(true);
-          setIsPlaying(false);
-          sound.playGameOver();
+          handleGameOver(score);
           return prevSnake;
         }
 
@@ -401,30 +418,34 @@ export const SnakeGame: React.FC = () => {
       {/* On-Screen Mobile Touch D-Pad */}
       <div className="mt-4 flex flex-col items-center gap-1 sm:hidden">
         <button
+          onTouchStart={(e) => { e.preventDefault(); changeDirection('UP'); }}
           onClick={() => changeDirection('UP')}
-          className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+          className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
           aria-label="Up"
         >
           <ArrowUp className="w-5 h-5" />
         </button>
         <div className="flex items-center gap-3">
           <button
+            onTouchStart={(e) => { e.preventDefault(); changeDirection('LEFT'); }}
             onClick={() => changeDirection('LEFT')}
-            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
             aria-label="Left"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <button
+            onTouchStart={(e) => { e.preventDefault(); changeDirection('DOWN'); }}
             onClick={() => changeDirection('DOWN')}
-            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
             aria-label="Down"
           >
             <ArrowDown className="w-5 h-5" />
           </button>
           <button
+            onTouchStart={(e) => { e.preventDefault(); changeDirection('RIGHT'); }}
             onClick={() => changeDirection('RIGHT')}
-            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200"
+            className="w-14 h-12 rounded-xl bg-slate-800/90 active:bg-cyan-500 active:text-slate-950 border border-slate-700 flex items-center justify-center text-slate-200 cursor-pointer"
             aria-label="Right"
           >
             <ArrowRight className="w-5 h-5" />

@@ -35,6 +35,7 @@ export const MemoryGridActivity: React.FC<MemoryGridProps> = ({ onBack, isDaily 
   const [hasStarted, setHasStarted] = useState<boolean>(false);
 
   const timeoutRef = useRef<number | null>(null);
+  const hasRecordedRef = useRef<boolean>(false);
 
   // Load personal best
   useEffect(() => {
@@ -82,6 +83,7 @@ export const MemoryGridActivity: React.FC<MemoryGridProps> = ({ onBack, isDaily 
 
   // Start fresh game
   const startGame = () => {
+    hasRecordedRef.current = false;
     setHasStarted(true);
     setIsGameOver(false);
     setLevel(1);
@@ -141,17 +143,19 @@ export const MemoryGridActivity: React.FC<MemoryGridProps> = ({ onBack, isDaily 
       if (newLives <= 0) {
         setIsGameOver(true);
         // Record final score & level
-        const finalScore = score;
-        const totalPointsEarned = Math.max(25, level * 15);
-        recordActivityCompletion({
-          activityId: 'memory-grid',
-          activityTitle: 'Memory Grid',
-          type: 'activity',
-          targetPath: '/activity/memory-grid',
-          pointsEarned: totalPointsEarned,
-          score: level,
-          isDailyPortal: isDaily,
-        });
+        if (!hasRecordedRef.current) {
+          hasRecordedRef.current = true;
+          const totalPointsEarned = Math.max(25, level * 15);
+          recordActivityCompletion({
+            activityId: 'memory-grid',
+            activityTitle: 'Memory Grid',
+            type: 'activity',
+            targetPath: '/activity/memory-grid',
+            pointsEarned: totalPointsEarned,
+            score: level,
+            isDailyPortal: isDaily,
+          });
+        }
       } else {
         // Replay sequence for current level
         setPlayerStep(0);

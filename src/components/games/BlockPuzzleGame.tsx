@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { RotateCcw, Trophy, Sparkles, Volume2, HelpCircle } from 'lucide-react';
 import { sound } from '../../utils/audio';
+import { recordActivityCompletion } from '../../utils/progression';
 
 // Shape matrix definitions
 interface Shape {
@@ -62,6 +63,7 @@ export const BlockPuzzleGame: React.FC = () => {
   const [comboStreak, setComboStreak] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [clearingLines, setClearingLines] = useState<{ rows: number[]; cols: number[] }>({ rows: [], cols: [] });
+  const hasRecordedRef = useRef<boolean>(false);
 
   const getRandomShape = useCallback((): Shape => {
     const preset = SHAPE_PRESETS[Math.floor(Math.random() * SHAPE_PRESETS.length)];
@@ -134,6 +136,7 @@ export const BlockPuzzleGame: React.FC = () => {
 
   // Start new game
   const restartGame = useCallback(() => {
+    hasRecordedRef.current = false;
     const emptyBoard = Array(BOARD_SIZE).fill(null).map(() => Array(BOARD_SIZE).fill(null));
     setBoard(emptyBoard);
     setScore(0);
@@ -258,6 +261,18 @@ export const BlockPuzzleGame: React.FC = () => {
     if (checkGameOver(nextShapes, newBoard)) {
       setGameOver(true);
       sound.playGameOver();
+      if (!hasRecordedRef.current && updatedScore >= 40) {
+        hasRecordedRef.current = true;
+        const sessionXp = Math.min(50, Math.floor(updatedScore / 50));
+        recordActivityCompletion({
+          activityId: 'block-puzzle',
+          activityTitle: 'Neon Block Puzzle',
+          type: 'game',
+          targetPath: '/game/block-puzzle',
+          pointsEarned: sessionXp,
+          score: updatedScore,
+        });
+      }
     }
   };
 

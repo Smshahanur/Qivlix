@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { sound } from '../../utils/audio';
 import { MYSTERY_PICTURES } from '../../data/playgroundContent';
-import { recordActivityCompletion } from '../../utils/progression';
+import { recordActivityCompletion, getStoredProfile } from '../../utils/progression';
+import { getDailyMysteryPictureIndex } from '../../utils/dailySystem';
 import { Search, RotateCcw, ArrowLeft, CheckCircle2, AlertCircle, HelpCircle, Sparkles, Eye } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -11,17 +12,34 @@ interface MysteryPictureProps {
 }
 
 export const MysteryPictureActivity: React.FC<MysteryPictureProps> = ({ onBack, isDaily }) => {
-  const [mysteryIdx, setMysteryIdx] = useState<number>(0);
+  const [mysteryIdx, setMysteryIdx] = useState<number>(() => getDailyMysteryPictureIndex());
   const [cluesRevealed, setCluesRevealed] = useState<number>(1);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
   const [isSolved, setIsSolved] = useState<boolean>(false);
   const [isFailed, setIsFailed] = useState<boolean>(false);
   const [pointsAwarded, setPointsAwarded] = useState<number>(0);
+  const hasSolvedRef = useRef<boolean>(false);
 
   const currentMystery = MYSTERY_PICTURES[mysteryIdx % MYSTERY_PICTURES.length];
 
   // Calculate current available points based on revealed clues
   const currentMaxPoints = Math.max(25, 125 - cluesRevealed * 25);
+
+  // Check if this mystery was previously solved
+  useEffect(() => {
+    const profile = getStoredProfile();
+    const isAlreadyDecrypted = profile.personalBests[currentMystery.id] !== undefined;
+    if (isAlreadyDecrypted) {
+      setIsSolved(true);
+      setCluesRevealed(4);
+      setPointsAwarded(0);
+    } else {
+      setIsSolved(false);
+      setCluesRevealed(1);
+      setPointsAwarded(0);
+    }
+    hasSolvedRef.current = false;
+  }, [currentMystery.id]);
 
   const handleRevealClue = () => {
     if (cluesRevealed < 4) {
@@ -31,30 +49,29 @@ export const MysteryPictureActivity: React.FC<MysteryPictureProps> = ({ onBack, 
   };
 
   const handleGuess = (choice: string) => {
-    if (isSolved || isFailed) return;
+    if (isSolved || isFailed || hasSolvedRef.current) return;
 
     setSelectedGuess(choice);
 
     if (choice === currentMystery.correctAnswer) {
       // Solved!
+      hasSolvedRef.current = true;
       setIsSolved(true);
       setCluesRevealed(4);
       sound.playVictory();
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
 
-      const points = currentMaxPoints;
-      setPointsAwarded(points);
-
-      recordActivityCompletion({
-        activityId: 'mystery-picture',
+      const res = recordActivityCompletion({
+        activityId: currentMystery.id,
         activityTitle: `Mystery: ${currentMystery.title}`,
         type: 'activity',
         targetPath: '/activity/mystery-picture',
-        pointsEarned: points,
-        score: points,
+        pointsEarned: currentMaxPoints,
+        score: currentMaxPoints,
         isDailyPortal: isDaily,
         isMystery: true,
       });
+      setPointsAwarded(res.pointsAwarded);
     } else {
       sound.playGameOver();
       if (cluesRevealed < 4) {

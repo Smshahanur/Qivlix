@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { sound } from '../../utils/audio';
 import { ODD_ONE_OUT_SETS } from '../../data/playgroundContent';
 import { recordActivityCompletion, getStoredProfile } from '../../utils/progression';
@@ -19,6 +19,7 @@ export const OddOneOutActivity: React.FC<OddOneOutProps> = ({ onBack, isDaily })
   const [isRoundFinished, setIsRoundFinished] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [bestScore, setBestScore] = useState<number>(0);
+  const hasRecordedRef = useRef<boolean>(false);
 
   const totalRounds = Math.min(5, ODD_ONE_OUT_SETS.length);
   const currentSet = ODD_ONE_OUT_SETS[roundIdx % ODD_ONE_OUT_SETS.length];
@@ -74,16 +75,18 @@ export const OddOneOutActivity: React.FC<OddOneOutProps> = ({ onBack, isDaily })
     if (roundIdx + 1 >= totalRounds) {
       // Game completed
       setIsGameOver(true);
-      const finalCorrect = correctCount + (selectedIdx !== null && currentSet.items[selectedIdx].isOdd ? 1 : 0);
-      recordActivityCompletion({
-        activityId: 'odd-one-out',
-        activityTitle: 'Odd One Out',
-        type: 'activity',
-        targetPath: '/activity/odd-one-out',
-        pointsEarned: Math.max(30, score),
-        score: finalCorrect,
-        isDailyPortal: isDaily,
-      });
+      if (!hasRecordedRef.current) {
+        hasRecordedRef.current = true;
+        recordActivityCompletion({
+          activityId: 'odd-one-out',
+          activityTitle: 'Odd One Out',
+          type: 'activity',
+          targetPath: '/activity/odd-one-out',
+          pointsEarned: Math.max(30, score),
+          score: correctCount,
+          isDailyPortal: isDaily,
+        });
+      }
       if (score > bestScore) {
         setBestScore(score);
       }
@@ -97,6 +100,7 @@ export const OddOneOutActivity: React.FC<OddOneOutProps> = ({ onBack, isDaily })
   };
 
   const restartGame = () => {
+    hasRecordedRef.current = false;
     setRoundIdx(0);
     setSelectedIdx(null);
     setScore(0);
