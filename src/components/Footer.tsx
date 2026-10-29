@@ -1,5 +1,5 @@
 import React from 'react';
-import { Gamepad2, Shield, Heart, ExternalLink } from 'lucide-react';
+import { Sparkles, Heart } from 'lucide-react';
 import { GAMES } from '../data/games';
 
 interface FooterProps {
@@ -15,49 +15,152 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="md:col-span-1 space-y-3">
             <button
               onClick={() => onNavigate('/')}
-              className="text-left group focus:outline-none"
+              className="text-left group focus:outline-none cursor-pointer"
             >
-              <div className="font-display font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-fuchsia-500">
+              <div className="font-display font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-amber-400">
                 QIVLIX
               </div>
               <div className="text-xs font-medium text-slate-400 group-hover:text-slate-300">
-                by Shahanur Mollah
+                The Daily Discovery Playground
               </div>
             </button>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Play Beyond Limits. Free, lightweight, instant browser gaming built for mobile and desktop players worldwide.
+              Play quick games, solve daily mysteries, explore unexpected discoveries, and earn virtual achievements with zero download delays.
             </p>
             <div className="pt-1 text-xs text-cyan-400/90 flex items-center gap-1.5 font-mono">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span>Zero Downloads · 100% Free</span>
+              <span>All-Ages Browser Entertainment</span>
             </div>
           </div>
 
-          {/* Games Column */}
+          {/* Playground Sections */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">
-              Playable Games
+              Playground Hubs
             </h4>
             <ul className="space-y-2 text-xs">
-              {GAMES.map((game) => (
-                <li key={game.id}>
-                  <button
-                    onClick={() => onNavigate(`/game/${game.slug}`)}
-                    className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
-                  >
-                    {game.title}
-                  </button>
-                </li>
-              ))}
+              <li>
+                <button
+                  onClick={() => onNavigate('/daily')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  Daily Portal
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/quick-play')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  Quick Play Arena
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/brain-lab')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  The Brain Lab
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/discover')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  Discovery Vault
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/collection')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  My Collection &amp; Badges
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/favorites')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  Saved Favorites
+                </button>
+              </li>
             </ul>
           </div>
 
-          {/* Platform Navigation */}
+          {/* Activities & Games */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">
-              Platform & Info
+              Activities &amp; Games
             </h4>
             <ul className="space-y-2 text-xs">
+              <li>
+                <button
+                  onClick={() => onNavigate('/activity/reaction-rush')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
+                  Reaction Rush
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/activity/memory-grid')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  Memory Grid
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/activity/odd-one-out')}
+                  className="hover:text-purple-400 transition-colors cursor-pointer text-left"
+                >
+                  Odd One Out
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/activity/mystery-picture')}
+                  className="hover:text-emerald-400 transition-colors cursor-pointer text-left"
+                >
+                  Mystery Picture
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/activity/daily-riddle')}
+                  className="hover:text-amber-300 transition-colors cursor-pointer text-left"
+                >
+                  Daily Riddle
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('/game/block-puzzle')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  Block Puzzle
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Support & Legal Navigation */}
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">
+              Support &amp; Legal
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <button
+                  onClick={() => onNavigate('/help')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer"
+                >
+                  Help &amp; FAQ
+                </button>
+              </li>
               <li>
                 <button
                   onClick={() => onNavigate('/about')}
@@ -100,30 +203,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
             </ul>
           </div>
-
-          {/* Creator & Compliance Column */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">
-              Creator &amp; Ad Standards
-            </h4>
-            <p className="text-xs text-slate-400 leading-relaxed mb-3">
-              Qivlix is engineered by developer <span className="text-slate-200 font-medium">Shahanur Mollah</span>. Prepared for high-performance responsive web gaming and modern monetization via Google AdSense.
-            </p>
-            <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400 space-y-1">
-              <div className="text-slate-300 font-medium">AdSense Policy Notice:</div>
-              <p className="text-[10px] text-slate-400 leading-tight">
-                Advertisements are labeled clearly. Gameplay areas remain unobstructed at all times.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Qivlix. Created by Shahanur Mollah.</p>
-          <p className="text-center sm:text-right text-slate-400 font-medium">
-            Play Beyond Limits.
-          </p>
+        <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <div>
+            &copy; {new Date().getFullYear()} Qivlix. The Daily Discovery Playground by Shahanur Mollah. All rights reserved.
+          </div>
+          <div className="flex items-center gap-4">
+            <span>Deterministic Daily System</span>
+            <span aria-hidden="true">·</span>
+            <span>Zero Install</span>
+            <span aria-hidden="true">·</span>
+            <span>Local Browser Storage</span>
+          </div>
         </div>
       </div>
     </footer>

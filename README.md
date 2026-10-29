@@ -1,132 +1,146 @@
-# Qivlix — Free Online Browser Games
+# Qivlix — The Daily Discovery Playground
 
 > **Branding:** Qivlix by Shahanur Mollah  
-> **Tagline:** Play Beyond Limits.  
+> **Tagline:** The Daily Discovery Playground  
 > **Creator:** Shahanur Mollah  
+> **Production URL:** [https://qivlix.vercel.app](https://qivlix.vercel.app)
 
-![Qivlix Banner](/src/assets/images/qivlix_hero_banner_1792937338560.jpg)
-
-Qivlix is a high-performance, dark-themed responsive browser gaming platform built with **React 19**, **TypeScript**, **Tailwind CSS**, and the browser **Web Audio API**. It is designed from scratch to deliver instant, zero-download, zero-lag arcade and puzzle entertainment on Android phones, iPhones, tablets, laptops, and desktop computers.
-
----
-
-## 🎮 Included Games (100% Playable)
-
-1. **Block Puzzle** (`/game/block-puzzle`)
-   - 10x10 matrix puzzle with randomized polyomino blocks.
-   - Drag-and-drop & tap-to-place mobile friendly controls.
-   - Horizontal and vertical multi-line blast clears with combo multipliers.
-   - High score persistence in `localStorage`.
-
-2. **Cyber Snake** (`/game/snake`)
-   - High-voltage cyber serpent navigating a neon arena.
-   - Continuous velocity scaling and special golden energy orbs (+50 pts).
-   - Mode selector: Screen Wrap Mode vs Hard Barrier Walls.
-   - WASD / Arrow keys on PC and on-screen responsive D-Pad / swipe gestures on mobile.
-
-3. **Memory Match** (`/game/memory-match`)
-   - Holographic cybernetic relic cards with 3D flip perspective animations.
-   - Multiple grid sizes: Casual 4x4 (16 cards), Standard 4x5 (20 cards), and Cyber Master 6x6 (36 cards).
-   - Timer, move counter, and combo streak multipliers.
-
-4. **Neon Tic-Tac-Toe** (`/game/tic-tac-toe`)
-   - Tactical 3x3 strategy with electric cyan 'X' and purple 'O'.
-   - Unbeatable Minimax AI mode, Casual AI mode, or 2-Player local pass-and-play.
-   - First move selector and match win streak tracking.
-
-5. **Number Merge (2048)** (`/game/number-merge`)
-   - Sliding number merge puzzle with rich cyberpunk tier colors.
-   - Keyboard arrow keys, touch swipe gestures, and on-screen directional controls.
-   - Friendly **Undo 1 Move** feature to recover from accidental slips.
-   - 2048 victory modal with endless continuation to 4096 and beyond.
-
-6. **Reaction Test** (`/game/reaction-test`)
-   - Sub-millisecond precision human reflex benchmark tool (`performance.now()`).
-   - False-start detection preventing early clicking on red.
-   - 5-round average mode with gamer tier classifications (*Cybernetic Godlike*, *Pro Esports*, *Average Human*).
+Qivlix is a polished, responsive browser entertainment platform where visitors play quick games, solve daily mysteries, explore unexpected discoveries, and earn virtual achievements. Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and the browser **Web Audio API**.
 
 ---
 
-## 🚀 Getting Started Locally
+## 🌟 Core Features & Navigation Sections
+
+### 1. Home (`/`)
+- Dynamic welcome hub with today's featured mystery challenge.
+- Live daily task progress indicator (e.g., `0 of 3 Completed`).
+- Prominent **Surprise Me** quantum roulette launcher.
+- Daily Discovery of the Day preview with deep-dive access.
+- Quick Jump Back for recently played activities.
+- Comprehensive footer with Help & FAQ, About, Contact, Privacy Policy, and Terms of Use.
+
+### 2. Daily Portal (`/daily`)
+- **Deterministic rotation**: Synchronized date-based challenges. Every visitor on the same calendar date experiences the exact same challenge triad and mystery.
+- **Weekly Challenge Theme**: Rotating themes (e.g., *Cosmic Horizons Week*, *Cybernetic Matrix Week*, *Deep Ocean Mysteries Week*).
+- **Streak Tracker**: Tracks consecutive days played based on local date transitions.
+- **Date Archive Navigator**: Revisit and play past dates.
+
+### 3. Quick Play Arena (`/quick-play`)
+- Instant casual reflex and arcade mini-games with zero load times:
+  - **Reaction Rush**: Millisecond-precision human reflex benchmark.
+  - **Odd One Out**: Fast visual and classification anomaly detection.
+  - **Cyber Snake**: High-voltage neon arena classic with wrap and barrier modes.
+  - **Block Puzzle**: 10x10 cyber grid polyomino line clears and combos.
+  - **Neon Breakout**: Photonic brick-shattering arcade action.
+  - **Cyber Flap**: Drone navigation through voltage conduits.
+
+### 4. The Brain Lab (`/brain-lab`)
+- Structured cognitive logic workouts categorized by domain:
+  - **Memory Grid**: Ascending audio-visual sequence repetition with procedural harmonic notes.
+  - **Mystery Picture**: Progressive clue deduction with animated decrypting shroud tiles.
+  - **Daily Riddle**: Philosophical and lateral logic enigmas with hints and answers.
+  - **Cyber Wordle**: 5-letter cryptographic passcode deduction.
+  - **Cyber Sweeper**: Numerical boundary logic data defusing.
+  - **Quantum 2048**: Binary tile synthesis up to the 2048 singularity.
+  - **Cyber Memory Matrix**: Card pairing visual recall test.
+
+### 5. Discovery Vault (`/discover`)
+- Curiosity cards exploring science anomalies, extreme biology, and perceptual paradoxes:
+  - Time Dilation on satellites & gravitational altitude tests.
+  - The "Bloop" Antarctic icequake acoustic discovery.
+  - Biological immortality of *Turritopsis dohrnii*.
+  - Interactive **Checker Shadow Illusion** with toggleable connecting bridge.
+  - Interactive **Hermann Grid** peripheral ghost dot demonstration.
+  - "Mark as Learned" XP progress and bookmarking.
+
+### 6. My Collection (`/collection`)
+- Complete virtual progression vault:
+  - Total Points & Cosmic Rank Progression (*Starlight Seeker* to *Qivlix Archon*).
+  - 12 Distinctive Achievement Badges (e.g., *First Spark*, *Temporal Runner*, *Lightning Synapse*, *Detective Prime*).
+  - High score record table across all activities.
+  - Honest browser data disclosure.
+  - Reset progress option with confirmation dialog.
+
+### 7. Favorites (`/favorites`)
+- Dedicated personal collection of bookmarked games, riddles, and discoveries with 1-click launch.
+
+---
+
+## 🎲 Surprise Me Feature
+
+The Surprise Me modal triggers a quantum roll across games, activities, and discoveries. It intelligently avoids repeating the same activity consecutively.
+
+---
+
+## 🛠️ Technical Stack & Architecture
+
+- **Framework**: React 19 + TypeScript
+- **Bundler & Tooling**: Vite 8
+- **Styling**: Tailwind CSS v4 (`@import "tailwindcss";`) with deep midnight navy background (`#070a12`), violet, cyan, turquoise, and amber accents.
+- **Audio Engine**: Web Audio API procedural synthesis with zero external audio assets and global mute toggle.
+- **Persistence**: Safe, versioned `localStorage` with error fallback and cross-component broadcast events.
+- **SEO & Web Standards**: Verified Google Search Console tag, Google AdSense verification meta tag, OpenGraph cards, Twitter cards, and Schema.org `WebApplication` JSON-LD.
+
+---
+
+## 🚀 Local Development Setup
 
 ### Prerequisites
 - Node.js (version 18 or newer)
 - npm or pnpm
 
-### Installation
+### Running Locally
 ```bash
-# Clone or navigate to the project directory
-cd qivlix
-
-# Install dependencies
+# 1. Install dependencies
 npm install
 
-# Start the local development server
+# 2. Run the development server
 npm run dev
-```
 
-Visit `http://localhost:3000` (or the port indicated in your terminal) to play and test all games.
+# 3. Open in browser
+# Visit http://localhost:3000
+```
 
 ### Production Build
 ```bash
 npm run build
 ```
-This produces optimized production assets in the `dist` folder.
+Build output is saved to `/dist`.
 
 ---
 
 ## ☁️ Deploying to Vercel
 
-Qivlix is pre-configured for one-click deployment to **Vercel** with complete client-side routing support (`vercel.json` rewrites).
+The project includes `vercel.json` configured with client-side SPA rewrites so all routes (`/daily`, `/quick-play`, `/brain-lab`, `/discover`, `/collection`, etc.) load seamlessly on direct link refresh.
 
-### Option A: Using the Vercel Dashboard (Recommended)
-1. Push your repository to **GitHub**, **GitLab**, or **Bitbucket**.
-2. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
-3. Import your Qivlix repository.
-4. Framework Preset will be automatically detected as **Vite**.
-5. Click **"Deploy"**. Your site will be live within ~40 seconds!
+### Automatic Git Deployment
+1. Commit and push your changes to your Git repository:
+   ```bash
+   git add .
+   git commit -m "Build Qivlix — The Daily Discovery Playground"
+   git push origin main
+   ```
+2. In the [Vercel Dashboard](https://vercel.com/dashboard), import your repository or let automatic git integration build and deploy.
 
-### Option B: Using the Vercel CLI
+### CLI Deployment
 ```bash
-# Install Vercel CLI globally
-npm i -g vercel
-
-# Deploy directly from terminal
-vercel
+# Deploy to production
+npx vercel --prod
 ```
 
 ---
 
-## 💰 Google AdSense Configuration
+## ℹ️ Scope & Limitations (Version 1)
 
-Qivlix includes clearly defined, policy-compliant Google AdSense placeholder slots located in:
-- **Homepage Header Leaderboard** (`728x90` / responsive `320x50` on mobile)
-- **Mid-Content Responsive Banner** (`max-w-4xl`)
-- **Game Detail Pages** (below the active gameplay screen)
-
-### How to insert your verified Google AdSense Code:
-1. Open `index.html` and add your Google AdSense script inside `<head>`:
-   ```html
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-   ```
-2. Open `/src/components/AdPlaceholder.tsx` and uncomment or insert your `<ins class="adsbygoogle" ...>` tag.
-3. Replace the placeholder slot IDs with your real AdSense `data-ad-slot` values.
-
-> **AdSense Policy Note:** Advertisements are intentionally placed outside active game viewports to comply with Google AdSense terms and avoid accidental clicks. AdSense approval depends entirely on Google's independent domain audit; approval cannot be automatically guaranteed.
+- **Single Player Focus**: High scores, badges, and streaks are recorded locally on your device via sandboxed `localStorage`.
+- **Zero Cloud Account Requirement**: Visitors can immediately play, solve mysteries, and collect achievements without login friction.
+- **Device Sandboxing**: Local browser data may be lost if site data is wiped or if switching devices.
 
 ---
 
-## 🔍 SEO & Web Standards
+## 📜 Credits & Verification
 
-- **Title & Metadata:** Configured with dynamic client updates and OpenGraph / Twitter Cards.
-- **Structured Data:** Includes Schema.org `WebApplication` JSON-LD.
-- **Sitemap & Robots:** Located at `/public/sitemap.xml` and `/public/robots.txt`.
-- **Audio:** Zero external audio files; uses pure Web Audio API procedural synthesis with global mute toggling.
-
----
-
-## 📜 License & Credits
-
-- **Project:** Qivlix
-- **Creator:** Shahanur Mollah
-- **Copyright:** © 2026 Qivlix. Created by Shahanur Mollah. All rights reserved.
+- **Owner & Developer:** Shahanur Mollah
+- **Google Search Console Tag:** `<meta name="google-site-verification" content="ci49ZoPsQaIdKucUGiJXXPcg7_97_5wrK8ISnPa_WQw" />`
+- **Google AdSense Tag:** `<meta name="google-adsense-account" content="ca-pub-6725270907667054">`
+- © 2026 Qivlix. All rights reserved.
