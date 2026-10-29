@@ -58,44 +58,47 @@ export const HomePage: React.FC<HomePageProps> = ({
             {/* Hero Main Copy */}
             <div className="lg:col-span-7 space-y-6 text-left">
               {/* Creator & Sub-brand metadata */}
-              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-medium tracking-wide">
-                <span>Qivlix Playground</span>
-                <span aria-hidden="true" className="text-slate-600">·</span>
-                <span>The Daily Discovery Playground</span>
-                <span aria-hidden="true" className="text-slate-600">·</span>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs font-mono text-cyan-400 font-medium tracking-wide">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span>Qivlix Playground</span>
+                </div>
+                <span aria-hidden="true" className="hidden sm:inline text-slate-600">·</span>
+                <span className="text-slate-300">The Daily Discovery Playground</span>
+                <span aria-hidden="true" className="hidden sm:inline text-slate-600">·</span>
                 <span className="text-purple-400">All-Ages Browser Entertainment</span>
               </div>
 
-              <h1 className="font-display font-black text-4xl sm:text-6xl text-slate-100 tracking-tight leading-[1.08] text-balance">
+              <h1 className="font-display font-black text-[clamp(1.85rem,6.8vw,3.75rem)] text-slate-100 tracking-tight leading-[1.08] text-balance">
                 Play. Deduce. <br />
                 <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 bg-clip-text text-transparent">
                   Discover Everyday.
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-xl leading-relaxed">
                 Step into a distinctive browser playground of quick games, daily mysteries, cognitive workouts, and fascinating scientific curiosities.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center gap-2.5 sm:gap-3 pt-2 w-full xs:w-auto">
                 <button
                   onClick={() => onNavigate('/daily')}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Enter Daily Portal <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button
                   onClick={onOpenSurprise}
-                  className="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center gap-2 cursor-pointer shadow-md"
+                  className="px-4 sm:px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
                   <Dices className="w-4 h-4 text-amber-400" /> Surprise Me
                 </button>
 
                 <button
                   onClick={onOpenSearch}
-                  className="px-4 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-850 border border-slate-800 text-slate-400 hover:text-slate-200 text-sm transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-850 border border-slate-800 text-slate-400 hover:text-slate-200 text-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   aria-label="Search"
                 >
                   <Search className="w-4 h-4" /> Search
@@ -104,16 +107,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               {/* Daily Completion Indicator Pill Bar */}
               <div className="pt-2">
-                <div className="inline-flex flex-wrap items-center gap-3 p-2.5 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs">
+                <div className="w-full sm:w-auto inline-flex flex-col sm:flex-row items-start sm:items-center p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs gap-2 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-800/80">
                   <div className="flex items-center gap-1.5 text-amber-400 font-semibold">
-                    <Flame className="w-4 h-4" /> {profile.streak} Day Streak
+                    <Flame className="w-4 h-4 shrink-0" /> {profile.streak} Day Streak
                   </div>
-                  <span className="text-slate-700">|</span>
-                  <div className="flex items-center gap-1.5 text-cyan-400 font-medium">
-                    <CheckCircle2 className="w-4 h-4" /> {completedCount} of 3 Daily Portal Tasks Done
+                  <div className="flex items-center gap-1.5 text-cyan-400 font-medium pt-2 sm:pt-0 sm:pl-4">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" /> {completedCount} of 3 Daily Portal Tasks Done
                   </div>
-                  <span className="text-slate-700">|</span>
-                  <div className="text-slate-300 font-mono">
+                  <div className="text-slate-300 font-mono pt-2 sm:pt-0 sm:pl-4">
                     {profile.points} Total XP
                   </div>
                 </div>
@@ -122,10 +123,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             {/* Hero Right Column: Today's Featured Mystery */}
             <div className="lg:col-span-5">
-              <div className="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl relative overflow-hidden group hover:border-amber-500/40 transition-all">
+              <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl relative overflow-hidden group hover:border-amber-500/40 transition-all">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
-                <div className="space-y-4 relative z-10">
+                <div className="space-y-3.5 sm:space-y-4 relative z-10">
                   <div className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-1.5 text-amber-400 font-bold uppercase tracking-wider">
                       <Sparkles className="w-4 h-4" /> Today's Featured Mystery
@@ -133,7 +134,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <span className="text-slate-400 font-mono">+{dailyData.featuredMystery.points} XP</span>
                   </div>
 
-                  <h3 className="text-2xl font-black text-white group-hover:text-amber-300 transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors">
                     {dailyData.featuredMystery.title}
                   </h3>
 
@@ -141,7 +142,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     {dailyData.featuredMystery.tagline}
                   </p>
 
-                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs text-slate-400 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-0">
                     <span>Weekly Theme: {dailyData.weeklyTheme.title}</span>
                     <span className="text-amber-400">Deterministic</span>
                   </div>
@@ -181,13 +182,13 @@ export const HomePage: React.FC<HomePageProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {dailyData.activities.map((act, idx) => {
               const isDone = todayProgress.completedActivityIds.includes(act.id);
               return (
                 <div
                   key={act.id}
-                  className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col justify-between ${
                     isDone
                       ? 'bg-emerald-950/20 border-emerald-500/30'
                       : 'bg-slate-900/90 border-slate-800 hover:border-slate-700'
@@ -207,7 +208,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       )}
                     </div>
                     <div className="text-xs text-cyan-400 font-medium">{act.category}</div>
-                    <h3 className="text-lg font-bold text-white mt-0.5">{act.title}</h3>
+                    <h3 className="text-base sm:text-lg font-bold text-white mt-0.5">{act.title}</h3>
                     <p className="text-xs text-slate-300 mt-1 leading-relaxed">{act.subtitle}</p>
                   </div>
 
@@ -274,12 +275,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         </section>
 
         {/* New Discoveries & Interesting Facts Preview */}
-        <section className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-purple-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <section className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-900/80 border border-purple-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-2 text-xs text-purple-400 font-bold uppercase tracking-wider">
               <Compass className="w-4 h-4" /> Discovery of the Day
             </div>
-            <h3 className="text-2xl font-black text-white">{discoveryOfTheDay.title}</h3>
+            <h3 className="text-xl sm:text-2xl font-black text-white">{discoveryOfTheDay.title}</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               {discoveryOfTheDay.summary}
             </p>
@@ -290,14 +291,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           <button
             onClick={() => onNavigate('/discover')}
-            className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-lg shadow-purple-600/25 transition-all flex items-center gap-2 shrink-0 cursor-pointer"
+            className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-lg shadow-purple-600/25 transition-all flex items-center gap-2 shrink-0 cursor-pointer w-full sm:w-auto justify-center"
           >
             Explore Discovery Vault <ArrowRight className="w-4 h-4" />
           </button>
         </section>
 
         {/* Personal Best & Progression Snapshot */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs text-cyan-400 font-semibold mb-2">

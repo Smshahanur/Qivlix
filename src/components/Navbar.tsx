@@ -55,15 +55,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           : 'bg-[#070a12]/80 backdrop-blur-sm border-slate-800/40'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Zone */}
         <button
           onClick={() => handleLinkClick('/')}
-          className="flex flex-col items-start group focus:outline-none text-left cursor-pointer"
+          className="flex flex-col items-start group focus:outline-none text-left cursor-pointer shrink-0"
           aria-label="Qivlix Home"
         >
-          <div className="flex items-center gap-2">
-            <span className="font-display font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-amber-400 group-hover:opacity-90 transition-opacity">
+          <div className="flex items-center gap-1.5">
+            <span className="font-display font-black text-xl sm:text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-amber-400 group-hover:opacity-90 transition-opacity">
               QIVLIX
             </span>
           </div>
@@ -93,21 +93,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Side Utility Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           {/* Surprise Me Quick Trigger */}
           <button
             onClick={onOpenSurprise}
-            className="px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+            className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
             aria-label="Surprise Me"
           >
-            <Dices className="w-4 h-4 text-amber-400" />
+            <Dices className="w-4 h-4 text-amber-400 shrink-0" />
             <span className="hidden sm:inline">Surprise Me</span>
           </button>
 
           {/* Search Trigger */}
           <button
             onClick={onOpenSearch}
-            className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors cursor-pointer"
             aria-label="Search activities"
           >
             <Search className="w-4 h-4" />
@@ -116,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Sound Mute Toggle */}
           <button
             onClick={toggleSound}
-            className={`p-2 rounded-xl border transition-colors cursor-pointer ${
+            className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl border transition-colors cursor-pointer ${
               isMuted
                 ? 'bg-slate-900 border-slate-800 text-slate-500 hover:text-slate-300'
                 : 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20'
@@ -129,10 +129,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Hamburger Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="lg:hidden p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
           </button>
         </div>
       </div>

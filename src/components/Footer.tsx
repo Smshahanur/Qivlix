@@ -9,10 +9,10 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="w-full bg-[#050810] border-t border-slate-800/80 text-slate-400">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 sm:mb-12">
           {/* Brand Column */}
-          <div className="md:col-span-1 space-y-3">
+          <div className="space-y-3">
             <button
               onClick={() => onNavigate('/')}
               className="text-left group focus:outline-none cursor-pointer"
@@ -206,11 +206,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4 text-center sm:text-left">
           <div>
             &copy; {new Date().getFullYear()} Qivlix. The Daily Discovery Playground by Shahanur Mollah. All rights reserved.
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap justify-center sm:justify-end items-center gap-2 sm:gap-4">
             <span>Deterministic Daily System</span>
             <span aria-hidden="true">·</span>
             <span>Zero Install</span>

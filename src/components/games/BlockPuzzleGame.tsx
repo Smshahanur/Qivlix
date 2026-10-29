@@ -328,13 +328,13 @@ export const BlockPuzzleGame: React.FC = () => {
 
       {/* 10x10 Board Grid */}
       <div
-        className="relative p-2 rounded-2xl bg-[#090e1c] border-2 border-slate-800 shadow-2xl touch-none"
+        className="relative p-1.5 sm:p-2.5 rounded-2xl bg-[#090e1c] border-2 border-slate-800 shadow-2xl touch-none max-w-full overflow-hidden"
         onMouseLeave={() => {
           setHoverRow(null);
           setHoverCol(null);
         }}
       >
-        <div className="grid grid-cols-10 gap-1 sm:gap-1.5">
+        <div className="grid grid-cols-10 gap-0.5 sm:gap-1.5">
           {board.map((row, rIdx) =>
             row.map((cell, cIdx) => {
               // Check if cell is hovered by valid placement
@@ -371,7 +371,7 @@ export const BlockPuzzleGame: React.FC = () => {
                   style={{
                     backgroundColor: cell ? cell : isPreview ? (isValidPreview ? '#06b6d4' : '#ef4444') : undefined
                   }}
-                  className={`w-7 h-7 sm:w-9 sm:h-9 rounded-md transition-all duration-100 flex items-center justify-center cursor-pointer ${
+                  className={`w-[clamp(24px,7vw,36px)] h-[clamp(24px,7vw,36px)] rounded-xs sm:rounded-md transition-all duration-100 flex items-center justify-center cursor-pointer ${
                     cell
                       ? 'shadow-md shadow-cyan-500/10 border border-white/20'
                       : isPreview

@@ -74,38 +74,38 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
         </div>
 
         {/* Streak & Completion Badge */}
-        <div className="flex items-center gap-3">
-          <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Flame className="w-6 h-6" />
+        <div className="grid grid-cols-2 sm:flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+          <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+              <Flame className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
-              <div className="text-xs text-slate-400">Current Streak</div>
-              <div className="text-lg font-bold font-mono text-white">{profile.streak} Days</div>
+              <div className="text-[10px] sm:text-xs text-slate-400">Current Streak</div>
+              <div className="text-base sm:text-lg font-bold font-mono text-white">{profile.streak} Days</div>
             </div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
-              <CheckCircle2 className="w-6 h-6" />
+          <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+              <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
-              <div className="text-xs text-slate-400">Today's Progress</div>
-              <div className="text-lg font-bold font-mono text-cyan-400">{completedCount} / 3</div>
+              <div className="text-[10px] sm:text-xs text-slate-400">Today's Tasks</div>
+              <div className="text-base sm:text-lg font-bold font-mono text-cyan-400">{completedCount} / 3</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Weekly Theme Banner */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-purple-950/40 via-slate-900 to-cyan-950/30 border border-purple-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-start gap-4">
-          <div className="p-3 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 shrink-0">
+      <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-purple-950/40 via-slate-900 to-cyan-950/30 border border-purple-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div className="p-2.5 sm:p-3 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 shrink-0">
             {getThemeIcon(dailyData.weeklyTheme.badgeIcon)}
           </div>
           <div>
             <div className="text-xs text-purple-400 font-semibold uppercase tracking-wider">Weekly Theme</div>
-            <h2 className="text-lg font-bold text-white mt-0.5">{dailyData.weeklyTheme.title}</h2>
+            <h2 className="text-base sm:text-lg font-bold text-white mt-0.5">{dailyData.weeklyTheme.title}</h2>
             <p className="text-xs text-slate-300 mt-1">{dailyData.weeklyTheme.description}</p>
           </div>
         </div>
@@ -118,23 +118,23 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
       </div>
 
       {/* Featured Mystery Card */}
-      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden">
+      <div className="p-4 sm:p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-xs text-amber-400 font-semibold">
               <span>Today's Featured Mystery Challenge</span>
               <span aria-hidden="true">·</span>
               <span>+{dailyData.featuredMystery.points} XP Reward</span>
             </div>
-            <h2 className="text-2xl font-bold text-white">{dailyData.featuredMystery.title}</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-white">{dailyData.featuredMystery.title}</h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl">{dailyData.featuredMystery.tagline}</p>
           </div>
 
           <button
             onClick={() => onNavigate(`/activity/${dailyData.featuredMystery.activitySlug}`)}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 shrink-0 cursor-pointer"
+            className="w-full sm:w-auto justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 shrink-0 cursor-pointer"
           >
             {isMysteryDone ? (
               <>
@@ -152,11 +152,11 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
       {/* 3 Deterministic Activities */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-white">Daily Triad Challenges</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-white">Daily Triad Challenges</h2>
           <span className="text-xs text-slate-400">Complete all three for bonus XP</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {dailyData.activities.map((act, index) => {
             const isCompleted = dayProgress.completedActivityIds.includes(act.id);
             return (

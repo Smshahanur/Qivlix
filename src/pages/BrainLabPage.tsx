@@ -110,12 +110,12 @@ export const BrainLabPage: React.FC<BrainLabPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Filter Segmented Control */}
-        <div className="flex flex-wrap items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl self-start md:self-auto">
+        <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl self-start md:self-auto overflow-x-auto no-scrollbar max-w-full">
           {['All', 'Working Memory', 'Deductive Logic', 'Lateral Thinking', 'Math & Spatial'].map((dom) => (
             <button
               key={dom}
               onClick={() => setFilter(dom)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 filter === dom
                   ? 'bg-cyan-500 text-slate-950 shadow-sm'
                   : 'text-slate-400 hover:text-white'
@@ -128,13 +128,13 @@ export const BrainLabPage: React.FC<BrainLabPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Grid of Brain Lab modules */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filtered.map((item) => {
           const pb = profile.personalBests[item.id];
           return (
             <div
               key={item.id}
-              className="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between group shadow-lg hover:shadow-purple-500/10"
+              className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between group shadow-lg hover:shadow-purple-500/10"
             >
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs text-slate-400">

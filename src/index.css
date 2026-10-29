@@ -7,6 +7,15 @@
     --font-mono: 'JetBrains Mono', monospace;
   }
 
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: #070a12;
@@ -16,6 +25,15 @@
   h1, h2, h3, h4, .font-display {
     font-family: var(--font-display);
   }
+}
+
+/* Hide scrollbar for touch scrolling rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Custom sleek scrollbar for gaming theme */

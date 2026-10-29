@@ -70,12 +70,12 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = () => {
         </div>
 
         {/* Filter Segmented Control */}
-        <div className="flex flex-wrap items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl self-start md:self-auto">
+        <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl overflow-x-auto no-scrollbar max-w-full self-start md:self-auto">
           {topics.map((top) => (
             <button
               key={top}
               onClick={() => setTopicFilter(top)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 topicFilter === top
                   ? 'bg-purple-600 text-white shadow-sm'
                   : 'text-slate-400 hover:text-white'
