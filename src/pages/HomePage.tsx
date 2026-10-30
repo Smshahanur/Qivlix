@@ -81,24 +81,24 @@ export const HomePage: React.FC<HomePageProps> = ({
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center gap-2.5 sm:gap-3 pt-2 w-full xs:w-auto">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2 w-full sm:w-auto">
                 <button
                   onClick={() => onNavigate('/daily')}
-                  className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
                 >
                   Enter Daily Portal <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button
                   onClick={onOpenSurprise}
-                  className="px-4 sm:px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  className="px-4 sm:px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md w-full sm:w-auto"
                 >
                   <Dices className="w-4 h-4 text-amber-400" /> Surprise Me
                 </button>
 
                 <button
                   onClick={onOpenSearch}
-                  className="px-4 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-850 border border-slate-800 text-slate-400 hover:text-slate-200 text-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="px-4 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-850 border border-slate-800 text-slate-400 hover:text-slate-200 text-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer w-full sm:w-auto"
                   aria-label="Search"
                 >
                   <Search className="w-4 h-4" /> Search
@@ -106,8 +106,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
 
               {/* Daily Completion Indicator Pill Bar */}
-              <div className="pt-2">
-                <div className="w-full sm:w-auto inline-flex flex-col sm:flex-row items-start sm:items-center p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs gap-2 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-800/80">
+              <div className="pt-2 w-full max-w-full">
+                <div className="w-full sm:w-auto inline-flex flex-col sm:flex-row items-stretch sm:items-center p-2.5 sm:p-3 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs gap-2 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-800/80 max-w-full">
                   <div className="flex items-center gap-1.5 text-amber-400 font-semibold">
                     <Flame className="w-4 h-4 shrink-0" /> {profile.streak} Day Streak
                   </div>

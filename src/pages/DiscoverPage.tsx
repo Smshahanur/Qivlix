@@ -56,15 +56,14 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = () => {
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-        <div>
-          <div className="flex items-center gap-2 text-xs text-purple-400 font-medium mb-1">
-            <Compass className="w-4 h-4" />
-            <span>Curiosity Archive</span>
-            <span aria-hidden="true">·</span>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-purple-400 font-medium mb-1">
+            <span className="flex items-center gap-1"><Compass className="w-4 h-4 shrink-0" /> Curiosity Archive</span>
+            <span aria-hidden="true" className="text-slate-600 hidden sm:inline">·</span>
             <span>{profile.learnedDiscoveries.length} of {DISCOVERIES_VAULT.length} Explored</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">The Discovery Vault</h1>
-          <p className="text-sm text-slate-300 mt-1 max-w-xl">
+          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">The Discovery Vault</h1>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl leading-relaxed">
             Mind-bending physics anomalies, deep-ocean mysteries, optical illusions, and scientific enigmas. Read deep dives and collect them into your records.
           </p>
         </div>
@@ -88,7 +87,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = () => {
       </div>
 
       {/* Discovery Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {filtered.map((item) => {
           const isExpanded = expandedId === item.id;
           const isLearned = profile.learnedDiscoveries.includes(item.id);
@@ -97,7 +96,7 @@ export const DiscoverPage: React.FC<DiscoverPageProps> = () => {
           return (
             <div
               key={item.id}
-              className={`p-6 rounded-3xl border transition-all duration-200 flex flex-col justify-between ${
+              className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all duration-200 flex flex-col justify-between ${
                 isLearned
                   ? 'bg-slate-900/90 border-slate-800 shadow-md'
                   : 'bg-slate-900/95 border-purple-500/20 hover:border-purple-500/40'

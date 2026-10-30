@@ -95,30 +95,30 @@ export const MysteryPictureActivity: React.FC<MysteryPictureProps> = ({ onBack, 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       {/* Top Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 min-w-0">
           {onBack && (
             <button
               onClick={onBack}
-              className="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 transition-colors"
+              className="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 transition-colors shrink-0 mt-0.5 sm:mt-0"
               aria-label="Go Back"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           )}
-          <div>
-            <div className="flex items-center gap-2 text-xs text-purple-400 font-medium">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-1.5 text-xs text-purple-400 font-medium">
               <span>Investigation & Deduction</span>
-              <span aria-hidden="true">·</span>
-              <span>{currentMystery.category}</span>
+              <span aria-hidden="true" className="text-slate-600 hidden sm:inline">·</span>
+              <span className="truncate">{currentMystery.category}</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Mystery Picture</h1>
+            <h1 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight break-words">Mystery Picture</h1>
           </div>
         </div>
 
-        <div className="text-right">
-          <div className="text-xs text-slate-400">Available Reward</div>
-          <div className="text-base font-mono font-bold text-amber-400">+{currentMaxPoints} XP</div>
+        <div className="text-left sm:text-right pl-9 sm:pl-0">
+          <div className="text-[11px] sm:text-xs text-slate-400">Available Reward</div>
+          <div className="text-sm sm:text-base font-mono font-bold text-amber-400">+{currentMaxPoints} XP</div>
         </div>
       </div>
 

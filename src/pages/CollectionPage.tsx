@@ -45,33 +45,33 @@ export const CollectionPage: React.FC<CollectionPageProps> = () => {
       {/* Profile Header Hero */}
       <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-slate-900 via-purple-950/30 to-slate-900 border border-slate-800 shadow-xl relative overflow-hidden">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs text-purple-400 font-semibold tracking-wider uppercase">
+          <div className="space-y-2 min-w-0">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-purple-400 font-semibold tracking-wider uppercase">
               <span>Virtual Identity & Progress</span>
-              <span aria-hidden="true">·</span>
+              <span aria-hidden="true" className="text-slate-600 hidden sm:inline">·</span>
               <span className={currentTitle.color}>{currentTitle.title}</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">My Vault & Badges</h1>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
               Track your cognitive milestones, unlocked cosmic rankings, personal bests, and daily streak archives.
             </p>
           </div>
 
           {/* Quick Metrics */}
-          <div className="grid grid-cols-3 sm:flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-            <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-0 flex-1 sm:min-w-[90px]">
-              <div className="text-[10px] sm:text-xs text-slate-400">Total Points</div>
-              <div className="text-base sm:text-2xl font-bold font-mono text-cyan-400 truncate">{profile.points} XP</div>
+          <div className="grid grid-cols-3 sm:flex items-center gap-1.5 sm:gap-3 w-full sm:w-auto">
+            <div className="p-2 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-0 flex-1 sm:min-w-[90px]">
+              <div className="text-[9px] sm:text-xs text-slate-400 truncate">Total Points</div>
+              <div className="text-xs xs:text-sm sm:text-2xl font-bold font-mono text-cyan-400 truncate">{profile.points} XP</div>
             </div>
 
-            <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-0 flex-1 sm:min-w-[90px]">
-              <div className="text-[10px] sm:text-xs text-slate-400">Daily Streak</div>
-              <div className="text-base sm:text-2xl font-bold font-mono text-amber-400 truncate">{profile.streak} d</div>
+            <div className="p-2 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-0 flex-1 sm:min-w-[90px]">
+              <div className="text-[9px] sm:text-xs text-slate-400 truncate">Daily Streak</div>
+              <div className="text-xs xs:text-sm sm:text-2xl font-bold font-mono text-amber-400 truncate">{profile.streak} d</div>
             </div>
 
-            <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-0 flex-1 sm:min-w-[90px]">
-              <div className="text-[10px] sm:text-xs text-slate-400">Badges</div>
-              <div className="text-base sm:text-2xl font-bold font-mono text-purple-400 truncate">{unlockedCount} / {ALL_BADGES.length}</div>
+            <div className="p-2 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-950/80 border border-slate-800 text-center min-w-0 flex-1 sm:min-w-[90px]">
+              <div className="text-[9px] sm:text-xs text-slate-400 truncate">Badges</div>
+              <div className="text-xs xs:text-sm sm:text-2xl font-bold font-mono text-purple-400 truncate">{unlockedCount} / {ALL_BADGES.length}</div>
             </div>
           </div>
         </div>

@@ -100,9 +100,9 @@ export const GameDetailPage: React.FC<GameDetailPageProps> = ({ slug, onNavigate
   const otherGames = GAMES.filter((g) => g.slug !== game.slug);
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-xs text-slate-400 mb-6 font-medium">
+      <nav className="flex items-center gap-2 text-xs text-slate-400 mb-4 sm:mb-6 font-medium">
         <button
           onClick={() => onNavigate('/')}
           className="hover:text-cyan-400 transition-colors flex items-center gap-1 cursor-pointer"
@@ -122,43 +122,43 @@ export const GameDetailPage: React.FC<GameDetailPageProps> = ({ slug, onNavigate
       </nav>
 
       {/* Game Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 sm:mb-6">
         <div>
           {/* Zero Pill unboxed metadata */}
-          <div className="flex items-center gap-2 text-xs text-slate-400 font-medium mb-1">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-slate-400 font-medium mb-1">
             <span className="text-cyan-400">{game.category}</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>Qivlix by Shahanur Mollah</span>
+            <span>Qivlix Playground</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>HTML5 Browser Play</span>
+            <span>Browser Play</span>
           </div>
           <h1 className="font-display font-black text-2xl sm:text-3xl text-slate-100">
             {game.title}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
             {game.tagline}
           </p>
         </div>
 
         {/* Global Game Actions */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2 shrink-0 self-start md:self-auto">
           <button
             onClick={handleSoundToggle}
-            className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-cyan-400 transition-all cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-cyan-400 transition-all cursor-pointer"
             title={isMuted ? 'Unmute game audio' : 'Mute game audio'}
           >
             {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
           </button>
           <button
             onClick={toggleFullscreen}
-            className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-cyan-400 transition-all cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-cyan-400 transition-all cursor-pointer"
             title="Toggle Fullscreen"
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </button>
           <button
             onClick={handleShare}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 hover:text-cyan-400 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 hover:text-cyan-400 transition-all cursor-pointer"
             title="Share this game"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
@@ -170,7 +170,7 @@ export const GameDetailPage: React.FC<GameDetailPageProps> = ({ slug, onNavigate
       {/* Main Playable Arena */}
       <div
         ref={gameContainerRef}
-        className="w-full rounded-2xl bg-[#080d1a] border border-slate-800/90 shadow-2xl p-4 sm:p-8 flex flex-col items-center justify-center min-h-[460px] relative overflow-hidden"
+        className="w-full rounded-2xl bg-[#080d1a] border border-slate-800/90 shadow-2xl p-2 sm:p-6 md:p-8 flex flex-col items-center justify-center min-h-[380px] sm:min-h-[460px] relative overflow-hidden"
       >
         {/* Playable Game Engine */}
         {renderGame()}

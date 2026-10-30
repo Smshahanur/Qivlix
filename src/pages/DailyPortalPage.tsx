@@ -58,40 +58,39 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
       {/* Header with Title and Streak */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-        <div>
-          <div className="flex items-center gap-2 text-xs text-cyan-400 font-medium mb-1">
-            <Calendar className="w-4 h-4" />
-            <span>Deterministic Portal</span>
-            <span aria-hidden="true">·</span>
-            <span>{dailyData.formattedDate}</span>
-            <span aria-hidden="true" className="text-slate-600">·</span>
-            <span className="text-slate-400">Local Timezone (Midnight Rollover)</span>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-cyan-400 font-medium mb-1">
+            <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 shrink-0" /> Deterministic Portal</span>
+            <span aria-hidden="true" className="text-slate-600 hidden sm:inline">·</span>
+            <span className="text-slate-300">{dailyData.formattedDate}</span>
+            <span aria-hidden="true" className="text-slate-600 hidden sm:inline">·</span>
+            <span className="text-slate-400">Local Timezone</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">The Daily Portal</h1>
-          <p className="text-sm text-slate-300 mt-1 max-w-xl">
+          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">The Daily Portal</h1>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl leading-relaxed">
             Synchronized daily challenges refreshed every midnight in your local timezone. Refreshing never alters today's activities. Complete all three to preserve your streak!
           </p>
         </div>
 
         {/* Streak & Completion Badge */}
-        <div className="grid grid-cols-2 sm:flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-          <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2 sm:gap-3">
+        <div className="grid grid-cols-2 sm:flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2 sm:gap-3 min-w-0">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
               <Flame className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <div className="text-[10px] sm:text-xs text-slate-400">Current Streak</div>
-              <div className="text-base sm:text-lg font-bold font-mono text-white">{profile.streak} Days</div>
+            <div className="min-w-0 truncate">
+              <div className="text-[10px] sm:text-xs text-slate-400 truncate">Current Streak</div>
+              <div className="text-sm sm:text-lg font-bold font-mono text-white truncate">{profile.streak} Days</div>
             </div>
           </div>
 
-          <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2 sm:gap-3">
+          <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-900 border border-slate-800 flex items-center gap-2 sm:gap-3 min-w-0">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
               <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <div className="text-[10px] sm:text-xs text-slate-400">Today's Tasks</div>
-              <div className="text-base sm:text-lg font-bold font-mono text-cyan-400">{completedCount} / 3</div>
+            <div className="min-w-0 truncate">
+              <div className="text-[10px] sm:text-xs text-slate-400 truncate">Today's Tasks</div>
+              <div className="text-sm sm:text-lg font-bold font-mono text-cyan-400 truncate">{completedCount} / 3</div>
             </div>
           </div>
         </div>
@@ -99,14 +98,14 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
 
       {/* Weekly Theme Banner */}
       <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-purple-950/40 via-slate-900 to-cyan-950/30 border border-purple-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex items-start gap-3 sm:gap-4 min-w-0">
           <div className="p-2.5 sm:p-3 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 shrink-0">
             {getThemeIcon(dailyData.weeklyTheme.badgeIcon)}
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="text-xs text-purple-400 font-semibold uppercase tracking-wider">Weekly Theme</div>
             <h2 className="text-base sm:text-lg font-bold text-white mt-0.5">{dailyData.weeklyTheme.title}</h2>
-            <p className="text-xs text-slate-300 mt-1">{dailyData.weeklyTheme.description}</p>
+            <p className="text-xs text-slate-300 mt-1 leading-relaxed">{dailyData.weeklyTheme.description}</p>
           </div>
         </div>
 
@@ -122,14 +121,14 @@ export const DailyPortalPage: React.FC<DailyPortalPageProps> = ({ onNavigate }) 
         <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs text-amber-400 font-semibold">
+          <div className="space-y-2 min-w-0 max-w-full">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-amber-400 font-semibold">
               <span>Today's Featured Mystery Challenge</span>
-              <span aria-hidden="true">·</span>
+              <span aria-hidden="true" className="text-slate-600 hidden sm:inline">·</span>
               <span>+{dailyData.featuredMystery.points} XP Reward</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white">{dailyData.featuredMystery.title}</h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl">{dailyData.featuredMystery.tagline}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-white break-words">{dailyData.featuredMystery.title}</h2>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">{dailyData.featuredMystery.tagline}</p>
           </div>
 
           <button

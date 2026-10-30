@@ -252,23 +252,23 @@ export const SnakeGame: React.FC = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-lg mx-auto select-none">
       {/* HUD Header */}
-      <div className="w-full flex items-center justify-between p-3.5 mb-4 rounded-xl bg-slate-900/90 border border-slate-800">
-        <div className="flex items-center gap-4">
+      <div className="w-full flex items-center justify-between p-2.5 sm:p-3.5 mb-4 rounded-xl bg-slate-900/90 border border-slate-800 gap-2">
+        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
           <div>
-            <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">Score</div>
-            <div className="text-xl font-bold font-mono text-purple-400 tabular-nums">
+            <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase tracking-wider">Score</div>
+            <div className="text-lg sm:text-xl font-bold font-mono text-purple-400 tabular-nums">
               {score}
             </div>
           </div>
-          <div className="border-l border-slate-800 pl-4">
-            <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1">
+          <div className="border-l border-slate-800 pl-2.5 sm:pl-4">
+            <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1">
               <Trophy className="w-3 h-3 text-amber-400" /> Best
             </div>
-            <div className="text-xl font-bold font-mono text-amber-400 tabular-nums">
+            <div className="text-lg sm:text-xl font-bold font-mono text-amber-400 tabular-nums">
               {highScore}
             </div>
           </div>
-          <div className="border-l border-slate-800 pl-4 hidden sm:block">
+          <div className="border-l border-slate-800 pl-4 hidden md:block">
             <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">Length</div>
             <div className="text-xl font-bold font-mono text-cyan-400 tabular-nums">
               {snake.length}
@@ -277,11 +277,11 @@ export const SnakeGame: React.FC = () => {
         </div>
 
         {/* Options & Action Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Wrap mode toggle */}
           <button
             onClick={() => setWrapMode(!wrapMode)}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-mono border transition-colors cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono border transition-colors cursor-pointer ${
               wrapMode
                 ? 'bg-purple-950/50 border-purple-500/40 text-purple-300'
                 : 'bg-slate-800 border-slate-700 text-slate-400'
@@ -293,7 +293,7 @@ export const SnakeGame: React.FC = () => {
 
           <button
             onClick={() => setIsPlaying((p) => !p)}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer"
             title={isPlaying ? 'Pause' : 'Play'}
           >
             {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -301,7 +301,7 @@ export const SnakeGame: React.FC = () => {
 
           <button
             onClick={resetGame}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer"
             title="Reset"
           >
             <RotateCcw className="w-4 h-4" />

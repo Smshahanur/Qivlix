@@ -160,7 +160,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#070a12] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen flex flex-col w-full max-w-full min-w-0 overflow-x-hidden bg-[#070a12] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
       <Navbar
         currentPath={currentPath}
         onNavigate={navigate}
@@ -168,7 +168,7 @@ export default function App() {
         onOpenSurprise={() => setSurpriseOpen(true)}
       />
 
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full min-w-0 max-w-full overflow-x-hidden">
         {renderCurrentPage()}
       </main>
 
