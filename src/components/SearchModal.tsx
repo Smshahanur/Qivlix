@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, Gamepad2, ArrowRight, Zap, Brain, Eye, HelpCircle, Compass } from 'lucide-react';
+import { Search, X, Gamepad2, ArrowRight, Zap, Brain, Eye, HelpCircle, Compass, BookOpen } from 'lucide-react';
 import { GAMES } from '../data/games';
+import { GUIDES } from '../data/guides';
 import { DISCOVERIES_VAULT } from '../data/playgroundContent';
 
 interface SearchModalProps {
@@ -15,7 +16,7 @@ interface SearchResult {
   category: string;
   description: string;
   path: string;
-  type: 'game' | 'activity' | 'discovery';
+  type: 'game' | 'activity' | 'guide' | 'discovery';
 }
 
 const ALL_SEARCHABLE: SearchResult[] = [
@@ -26,6 +27,14 @@ const ALL_SEARCHABLE: SearchResult[] = [
     description: g.shortDescription,
     path: `/game/${g.slug}`,
     type: 'game' as const,
+  })),
+  ...GUIDES.map((guide) => ({
+    id: guide.id,
+    title: guide.title,
+    category: `${guide.category} Guide`,
+    description: guide.summary,
+    path: `/guides/${guide.slug}`,
+    type: 'guide' as const,
   })),
   {
     id: 'reaction-rush',
@@ -62,8 +71,8 @@ const ALL_SEARCHABLE: SearchResult[] = [
   {
     id: 'daily-riddle',
     title: 'Daily Riddle',
-    category: 'Lateral Logic',
-    description: 'Solve philosophical and scientific word enigmas with hints.',
+    category: 'Enigma Vault',
+    description: 'Lateral logic thought experiments for cognitive sharpening.',
     path: '/activity/daily-riddle',
     type: 'activity',
   },
@@ -83,21 +92,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 50);
+      setTimeout(() => inputRef.current?.focus(), 50);
     } else {
       setQuery('');
     }
   }, [isOpen]);
 
-  // Global shortcut to trigger search
+  // Keyboard escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === '/' && !isOpen && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        inputRef.current?.focus();
-      }
       if (e.key === 'Escape' && isOpen) {
         onClose();
       }
@@ -108,91 +111,106 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onNav
 
   if (!isOpen) return null;
 
-  const filtered = ALL_SEARCHABLE.filter((item) => {
-    const q = query.toLowerCase().trim();
-    if (!q) return true;
-    return (
-      item.title.toLowerCase().includes(q) ||
-      item.category.toLowerCase().includes(q) ||
-      item.description.toLowerCase().includes(q)
-    );
-  });
+  const trimmed = query.trim().toLowerCase();
+  const results = trimmed
+    ? ALL_SEARCHABLE.filter(
+        (item) =>
+          item.title.toLowerCase().includes(trimmed) ||
+          item.category.toLowerCase().includes(trimmed) ||
+          item.description.toLowerCase().includes(trimmed)
+      ).slice(0, 8)
+    : ALL_SEARCHABLE.slice(0, 6);
 
   const handleSelect = (path: string) => {
-    onClose();
     onNavigate(path);
+    onClose();
   };
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'activity': return <Zap className="w-4 h-4 text-amber-400" />;
-      case 'discovery': return <Compass className="w-4 h-4 text-purple-400" />;
-      default: return <Gamepad2 className="w-4 h-4 text-cyan-400" />;
+      case 'game':
+        return <Gamepad2 className="w-4 h-4 text-[#ccff00]" />;
+      case 'guide':
+        return <BookOpen className="w-4 h-4 text-[#a3e635]" />;
+      case 'activity':
+        return <Zap className="w-4 h-4 text-[#ff5500]" />;
+      case 'discovery':
+        return <Compass className="w-4 h-4 text-[#ccff00]" />;
+      default:
+        return <Search className="w-4 h-4 text-slate-400" />;
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div
-        className="relative w-full max-w-xl rounded-2xl bg-[#0b101e] border border-slate-800 shadow-2xl overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-6 pt-16 sm:pt-24 bg-[#060810]/85 backdrop-blur-sm animate-fadeIn">
+      <div className="w-full max-w-xl rounded-2xl bg-[#0a0e1a] border border-[#1b243b] shadow-2xl overflow-hidden relative arcade-corner-ticks">
         {/* Search Input Bar */}
-        <div className="relative flex items-center border-b border-slate-800 px-4 py-3 bg-slate-900/60">
-          <Search className="w-5 h-5 text-slate-400 mr-3 shrink-0" />
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#1b243b] bg-[#060810]">
+          <Search className="w-4 h-4 text-[#ccff00] shrink-0" />
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search mini-games, activities, enigmas, or discoveries..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent border-0 text-sm text-slate-100 placeholder-slate-500 focus:outline-none"
+            placeholder="Search games, strategy guides, or discoveries..."
+            className="w-full bg-transparent text-sm text-[#fbfaf6] placeholder-slate-500 focus:outline-none font-mono"
           />
           {query ? (
             <button
               onClick={() => setQuery('')}
-              className="p-1 hover:text-slate-200 text-slate-400 transition-colors"
+              className="p-1 rounded text-slate-400 hover:text-white cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
           ) : (
-            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-500 bg-slate-800 rounded border border-slate-700">
+            <kbd className="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0a0e1a] border border-[#1b243b] text-slate-400">
               ESC
             </kbd>
           )}
         </div>
 
         {/* Results List */}
-        <div className="max-h-80 overflow-y-auto p-2 divide-y divide-slate-800/40">
-          {filtered.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-500">
-              No activities or games match "{query}".
-            </div>
-          ) : (
-            filtered.map((item) => (
+        <div className="max-h-[60vh] overflow-y-auto p-2 divide-y divide-[#1b243b]/40">
+          {results.length > 0 ? (
+            results.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSelect(item.path)}
-                className="w-full p-3 rounded-xl flex items-center justify-between text-left hover:bg-slate-850/80 transition-colors group cursor-pointer"
+                className="w-full text-left p-3 rounded-lg hover:bg-[#060810] transition-colors flex items-center justify-between group cursor-pointer"
               >
-                <div className="flex items-center gap-3 pr-2">
-                  <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#0c1222] border border-[#1b243b] flex items-center justify-center shrink-0">
                     {getIcon(item.type)}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm text-white group-hover:text-cyan-300 transition-colors">
+                      <span className="font-display font-bold text-sm text-[#fbfaf6] group-hover:text-[#ccff00] transition-colors">
                         {item.title}
                       </span>
-                      <span className="text-[10px] font-mono text-slate-500">· {item.category}</span>
+                      <span className="text-[10px] font-mono uppercase text-[#a3e635]">
+                        {item.category}
+                      </span>
                     </div>
-                    <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">{item.description}</p>
+                    <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-cyan-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+
+                <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-[#ccff00] group-hover:translate-x-0.5 transition-all shrink-0 ml-2" />
               </button>
             ))
+          ) : (
+            <div className="py-12 text-center text-xs font-mono text-slate-500">
+              No matching games or guides found for &quot;{query}&quot;.
+            </div>
           )}
+        </div>
+
+        {/* Footer Hint */}
+        <div className="px-4 py-2 bg-[#060810] border-t border-[#1b243b] text-[10px] font-mono text-slate-500 flex items-center justify-between">
+          <span>{ALL_SEARCHABLE.length} TOTAL INDEXED ITEMS</span>
+          <span>QIVLIX MIDNIGHT ARCADE</span>
         </div>
       </div>
     </div>

@@ -180,7 +180,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col w-full max-w-full min-w-0 overflow-x-hidden bg-[#070a12] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen flex flex-col w-full max-w-full min-w-0 overflow-x-hidden bg-[#060810] text-slate-100 selection:bg-[#ccff00] selection:text-[#060810]">
       <Navbar
         currentPath={currentPath}
         onNavigate={navigate}

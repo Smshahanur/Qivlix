@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getStoredProfile } from '../utils/progression';
-import { Brain, Play, Trophy, Sparkles, Lightbulb, Search, Key, ShieldAlert } from 'lucide-react';
+import { Brain, Play, Trophy, Sparkles, Lightbulb, Search, Key, Clock } from 'lucide-react';
+import { AdPlaceholder } from '../components/AdPlaceholder';
 
 interface BrainLabPageProps {
   onNavigate: (path: string) => void;
@@ -14,7 +15,7 @@ interface BrainItem {
   targetPath: string;
   icon: string;
   duration: string;
-  isNew?: boolean;
+  badge?: string;
 }
 
 const BRAIN_ACTIVITIES: BrainItem[] = [
@@ -26,7 +27,7 @@ const BRAIN_ACTIVITIES: BrainItem[] = [
     targetPath: '/activity/memory-grid',
     icon: 'Brain',
     duration: '2 min',
-    isNew: true,
+    badge: 'Cognitive'
   },
   {
     id: 'mystery-picture',
@@ -36,7 +37,7 @@ const BRAIN_ACTIVITIES: BrainItem[] = [
     targetPath: '/activity/mystery-picture',
     icon: 'Search',
     duration: '2 min',
-    isNew: true,
+    badge: 'Deduction'
   },
   {
     id: 'daily-riddle',
@@ -46,43 +47,37 @@ const BRAIN_ACTIVITIES: BrainItem[] = [
     targetPath: '/activity/daily-riddle',
     icon: 'Key',
     duration: '2 min',
-    isNew: true,
+    badge: 'Lateral'
   },
   {
-    id: 'cyber-wordle',
-    title: 'Cyber Wordle',
-    domain: 'Deductive Logic',
-    description: 'Deduce hidden 5-letter cryptographic passcodes using color-coded positional feedback.',
-    targetPath: '/game/cyber-wordle',
-    icon: 'Lightbulb',
+    id: 'block-puzzle',
+    title: 'Block Puzzle Matrix',
+    domain: 'Math & Spatial',
+    description: 'Fit randomized geometric polyomino blocks into the 10x10 matrix to trigger massive line combos.',
+    targetPath: '/game/block-puzzle',
+    icon: 'Brain',
     duration: '3 min',
-  },
-  {
-    id: 'cyber-sweeper',
-    title: 'Cyber Sweeper',
-    domain: 'Deductive Logic',
-    description: 'Use numerical boundary adjacency logic to safely flag volatile data minefields.',
-    targetPath: '/game/cyber-sweeper',
-    icon: 'ShieldAlert',
-    duration: '3 min',
+    badge: 'Spatial'
   },
   {
     id: 'number-merge',
     title: 'Quantum 2048 Merge',
     domain: 'Math & Spatial',
-    description: 'Plan spatial grid movements ahead to combine binary powers of 2 into the 2048 singularity.',
+    description: 'Slide numbered tiles to combine identical values and synthesize the legendary 2048 quantum core.',
     targetPath: '/game/number-merge',
     icon: 'Brain',
-    duration: '4 min',
+    duration: '5 min',
+    badge: 'Strategy'
   },
   {
-    id: 'memory-match',
-    title: 'Cyber Memory Matrix',
-    domain: 'Working Memory',
-    description: 'Uncover paired cryptographic glyphs against the clock to train fast visual recall.',
-    targetPath: '/game/memory-match',
-    icon: 'Sparkles',
-    duration: '2 min',
+    id: 'cyber-sweeper',
+    title: 'Cyber Sweeper',
+    domain: 'Deductive Logic',
+    description: 'Locate and disarm hidden data mines across tactical grids using strict numerical radar clues.',
+    targetPath: '/game/cyber-sweeper',
+    icon: 'Search',
+    duration: '4 min',
+    badge: 'Pure Logic'
   },
 ];
 
@@ -90,92 +85,92 @@ export const BrainLabPage: React.FC<BrainLabPageProps> = ({ onNavigate }) => {
   const [filter, setFilter] = useState<string>('All');
   const profile = getStoredProfile();
 
+  const domains = ['All', 'Working Memory', 'Deductive Logic', 'Lateral Thinking', 'Math & Spatial'];
+
   const filtered = BRAIN_ACTIVITIES.filter((item) => filter === 'All' || item.domain === filter);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12 space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1b243b]">
         <div>
-          <div className="flex items-center gap-2 text-xs text-cyan-400 font-medium mb-1">
-            <Brain className="w-4 h-4" />
-            <span>Cognitive Fitness</span>
-            <span aria-hidden="true">·</span>
-            <span>Logic & Memory Workouts</span>
+          <div className="flex items-center gap-2 text-xs font-mono text-[#ccff00] font-bold mb-1 uppercase tracking-wider">
+            <Brain className="w-4 h-4 text-[#ccff00]" />
+            <span>Cognitive Fitness &amp; Neural Calibration</span>
+            <span aria-hidden="true" className="text-slate-700">·</span>
+            <span className="text-slate-400">Play Beyond Limits</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">The Brain Lab</h1>
-          <p className="text-sm text-slate-300 mt-1 max-w-xl">
-            Sharpen working memory, pattern recognition, spatial deduction, and lateral thinking with structured cognitive puzzles.
+          <h1 className="text-3xl sm:text-4xl font-black text-[#fbfaf6] tracking-tight">The Brain Lab</h1>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
+            Targeted mental workouts designed to sharpen spatial reasoning, working memory, deductive classification, and lateral problem-solving.
           </p>
         </div>
 
         {/* Filter Segmented Control */}
-        <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl self-start md:self-auto overflow-x-auto no-scrollbar max-w-full">
-          {['All', 'Working Memory', 'Deductive Logic', 'Lateral Thinking', 'Math & Spatial'].map((dom) => (
+        <div className="flex items-center gap-1 p-1 bg-[#0a0e1a] border border-[#1b243b] rounded-xl self-start md:self-auto overflow-x-auto no-scrollbar max-w-full">
+          {domains.map((dom) => (
             <button
               key={dom}
               onClick={() => setFilter(dom)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase whitespace-nowrap transition-all cursor-pointer ${
                 filter === dom
-                  ? 'bg-cyan-500 text-slate-950 shadow-sm'
+                  ? 'bg-[#ccff00] text-[#060810] shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              {dom}
+              {dom === 'Working Memory' ? 'Memory' : dom === 'Deductive Logic' ? 'Logic' : dom === 'Lateral Thinking' ? 'Lateral' : dom === 'Math & Spatial' ? 'Spatial' : 'All'}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Grid of Brain Lab modules */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {/* Grid of Brain Lab Activities */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map((item) => {
           const pb = profile.personalBests[item.id];
           return (
             <div
               key={item.id}
-              className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between group shadow-lg hover:shadow-purple-500/10"
+              className="p-5 sm:p-6 rounded-xl bg-[#0a0e1a] border border-[#1b243b] hover:border-[#ccff00] transition-colors flex flex-col justify-between group shadow-lg"
             >
               <div>
-                <div className="flex items-center justify-between mb-3 text-xs text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="text-cyan-400 font-medium">{item.domain}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{item.duration}</span>
-                  </div>
-                  {item.isNew && (
-                    <span className="text-[10px] text-purple-400 font-bold uppercase tracking-wider">New</span>
-                  )}
+                <div className="flex items-center justify-between mb-3 text-xs font-mono text-slate-400">
+                  <span className="text-[#a3e635] font-semibold">{item.domain}</span>
+                  <span className="flex items-center gap-1 text-[11px]">
+                    <Clock className="w-3 h-3 text-slate-500" /> {item.duration}
+                  </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-xl font-bold text-[#fbfaf6] group-hover:text-[#ccff00] transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-xs text-slate-300 mt-2 leading-relaxed">{item.description}</p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="pt-6 mt-6 border-t border-[#1b243b] flex items-center justify-between">
                 <div>
                   {pb !== undefined ? (
-                    <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
-                      <Trophy className="w-3.5 h-3.5 text-amber-400" /> Best: {pb}
+                    <div className="text-[11px] font-mono text-[#ff6600] font-bold flex items-center gap-1">
+                      <Trophy className="w-3.5 h-3.5 text-[#ff5500]" /> Record: {pb}
                     </div>
                   ) : (
-                    <span className="text-[11px] text-slate-500">Unplayed</span>
+                    <span className="text-[11px] text-slate-500 font-mono">Uncalibrated</span>
                   )}
                 </div>
 
                 <button
                   onClick={() => onNavigate(item.targetPath)}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 rounded-lg bg-[#ccff00] hover:bg-[#d9ff33] text-[#060810] font-mono font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Play className="w-3.5 h-3.5 fill-current" /> Begin Lab
+                  <Play className="w-3.5 h-3.5 fill-current" /> Engage
                 </button>
               </div>
             </div>
           );
         })}
       </div>
+
+      <AdPlaceholder format="banner" slotId="brain-lab-bottom-banner" />
     </div>
   );
 };

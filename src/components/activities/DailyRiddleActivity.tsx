@@ -235,7 +235,7 @@ export const DailyRiddleActivity: React.FC<DailyRiddleProps> = ({ onBack, isDail
             <div className="pt-2 flex justify-end">
               <button
                 onClick={handleNextRiddle}
-                className="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs transition-all flex items-center gap-2 cursor-pointer"
+                className="px-5 py-2 rounded-lg bg-[#ccff00] text-[#060810] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#d8ff33] transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" /> Next Riddle
               </button>

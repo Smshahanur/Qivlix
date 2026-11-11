@@ -236,23 +236,23 @@ export const MemoryGridActivity: React.FC<MemoryGridProps> = ({ onBack, isDaily 
             </p>
             <button
               onClick={startGame}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/25 transition-all cursor-pointer"
+              className="px-6 py-2.5 rounded-lg bg-[#ccff00] text-[#060810] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#d8ff33] transition-colors cursor-pointer"
             >
               Start Level 1
             </button>
           </div>
         ) : isGameOver ? (
           <div className="text-center p-6 space-y-4">
-            <div className="text-xs text-rose-400 font-bold uppercase tracking-widest">Simulation Concluded</div>
-            <h3 className="text-2xl font-black text-white">Sequence Limit Reached</h3>
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
-              <div className="text-xs text-slate-400">Reached Level</div>
-              <div className="text-3xl font-mono font-bold text-cyan-400">Level {level}</div>
-              <div className="text-xs text-slate-300 pt-1">Total Score: {score} XP</div>
+            <div className="text-xs text-[#ff5500] font-mono font-bold uppercase tracking-widest">Simulation Concluded</div>
+            <h3 className="text-2xl font-black text-[#fbfaf6]">Sequence Limit Reached</h3>
+            <div className="p-4 rounded-xl bg-[#0a0e1a] border border-[#1b243b] space-y-1">
+              <div className="text-xs text-slate-400 font-mono">Reached Level</div>
+              <div className="text-3xl font-mono font-bold text-[#ccff00]">Level {level}</div>
+              <div className="text-xs text-slate-300 pt-1 font-mono">Total Score: {score} XP</div>
             </div>
             <button
               onClick={startGame}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg transition-all flex items-center gap-2 mx-auto cursor-pointer"
+              className="px-6 py-2.5 rounded-lg bg-[#ccff00] text-[#060810] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#d8ff33] transition-colors flex items-center gap-2 mx-auto cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" /> Try Again
             </button>

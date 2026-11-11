@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0a0e1a" />
+  <rect x="2" y="2" width="60" height="60" rx="12" stroke="#1e293b" stroke-width="2" />
+  <!-- Stylized Geometric Q Arc -->
+  <path d="M32 12C20.954 12 12 20.954 12 32C12 43.046 20.954 52 32 52C36.8 52 41.21 50.31 44.68 47.48L50 52.8L53.8 49L48.48 43.68C50.68 40.38 52 36.35 52 32C52 20.954 43.046 12 32 12ZM32 20C38.627 20 44 25.373 44 32C44 38.627 38.627 44 32 44C25.373 44 20 38.627 20 32C20 25.373 25.373 20 32 20Z" fill="#ccff00" />
+  <!-- Vivid Orange Core Spark -->
+  <polygon points="32,24 35,31 42,32 36,36 38,43 32,39 26,43 28,36 22,32 29,31" fill="#ff5500" />
+  <!-- Corner Pixel Ticks -->
+  <rect x="8" y="8" width="3" height="3" fill="#ccff00" opacity="0.6" />
+  <rect x="53" y="8" width="3" height="3" fill="#ccff00" opacity="0.6" />
+  <rect x="8" y="53" width="3" height="3" fill="#ccff00" opacity="0.6" />
+</svg>

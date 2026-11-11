@@ -2,12 +2,12 @@ import React from 'react';
 
 export const TermsOfUsePage: React.FC = () => {
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="mb-10 text-center sm:text-left">
-        <span className="text-xs font-mono uppercase tracking-wider text-purple-400">
-          User Agreement
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
+      <div className="border-b border-[#1b243b] pb-8 text-center sm:text-left">
+        <span className="text-xs font-mono uppercase tracking-wider text-[#ff6600] font-bold">
+          USER AGREEMENT // TERMS
         </span>
-        <h1 className="font-display font-black text-3xl sm:text-4xl text-slate-100 mt-1 mb-3">
+        <h1 className="font-display font-black text-3xl sm:text-4xl text-[#fbfaf6] mt-2 mb-2">
           Terms of Use
         </h1>
         <p className="text-xs font-mono text-slate-400">
@@ -15,18 +15,18 @@ export const TermsOfUsePage: React.FC = () => {
         </p>
       </div>
 
-      <div className="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-8 text-xs sm:text-sm text-slate-300 leading-relaxed">
+      <div className="p-6 sm:p-8 rounded-xl bg-[#0a0e1a] border border-[#1b243b] space-y-8 text-xs sm:text-sm text-slate-300 leading-relaxed">
         <section className="space-y-3">
-          <h2 className="font-display font-bold text-lg text-slate-100">
+          <h2 className="font-display font-bold text-lg text-[#fbfaf6]">
             1. Agreement to Terms
           </h2>
           <p>
-            By accessing or playing games on <strong className="text-slate-100">Qivlix</strong> (&quot;the Website&quot;), created by <strong className="text-slate-100">Shahanur Mollah</strong>, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+            By accessing or playing games on <strong className="text-white">Qivlix</strong> (&quot;the Website&quot;), created by <strong className="text-white">Shahanur Mollah</strong>, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site. Tagline: <em className="text-[#ccff00] not-italic font-bold">PLAY BEYOND LIMITS.</em>
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="font-display font-bold text-lg text-slate-100">
+          <h2 className="font-display font-bold text-lg text-[#fbfaf6]">
             2. Intellectual Property Rights
           </h2>
           <p>
@@ -35,7 +35,7 @@ export const TermsOfUsePage: React.FC = () => {
         </section>
 
         <section className="space-y-3">
-          <h2 className="font-display font-bold text-lg text-slate-100">
+          <h2 className="font-display font-bold text-lg text-[#fbfaf6]">
             3. Disclaimer of Warranties
           </h2>
           <p>
@@ -44,7 +44,7 @@ export const TermsOfUsePage: React.FC = () => {
         </section>
 
         <section className="space-y-3">
-          <h2 className="font-display font-bold text-lg text-slate-100">
+          <h2 className="font-display font-bold text-lg text-[#fbfaf6]">
             4. Limitation of Liability
           </h2>
           <p>
@@ -53,7 +53,7 @@ export const TermsOfUsePage: React.FC = () => {
         </section>
 
         <section className="space-y-3">
-          <h2 className="font-display font-bold text-lg text-slate-100">
+          <h2 className="font-display font-bold text-lg text-[#fbfaf6]">
             5. Advertising &amp; Third-Party Services
           </h2>
           <p>
@@ -62,7 +62,7 @@ export const TermsOfUsePage: React.FC = () => {
         </section>
 
         <section className="space-y-3">
-          <h2 className="font-display font-bold text-lg text-slate-100">
+          <h2 className="font-display font-bold text-lg text-[#fbfaf6]">
             6. Governing Law &amp; Updates
           </h2>
           <p>

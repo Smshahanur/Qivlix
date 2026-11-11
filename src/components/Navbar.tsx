@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Search, Menu, X, Dices, Heart, Trophy, Compass, Zap, Brain, Calendar, Home, BookOpen } from 'lucide-react';
+import { Volume2, VolumeX, Search, Menu, X, Dices, Heart, Trophy, Compass, Zap, Brain, Calendar, Home, BookOpen, Gamepad2 } from 'lucide-react';
 import { sound } from '../utils/audio';
+import { QivlixWordmark } from './BrandLogo';
 
 interface NavbarProps {
   currentPath: string;
@@ -21,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -34,13 +35,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { label: 'Home', path: '/', icon: Home },
+    { label: 'Games', path: '/#games', icon: Gamepad2 },
+    { label: 'Guides', path: '/guides', icon: BookOpen },
     { label: 'Daily Portal', path: '/daily', icon: Calendar },
     { label: 'Quick Play', path: '/quick-play', icon: Zap },
     { label: 'Brain Lab', path: '/brain-lab', icon: Brain },
-    { label: 'Guides', path: '/guides', icon: BookOpen },
-    { label: 'Discover', path: '/discover', icon: Compass },
-    { label: 'My Collection', path: '/collection', icon: Trophy },
-    { label: 'Favorites', path: '/favorites', icon: Heart },
+    { label: 'Collection', path: '/collection', icon: Trophy },
   ];
 
   const handleLinkClick = (path: string) => {
@@ -52,38 +52,31 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-200 border-b ${
         scrolled
-          ? 'bg-[#070a12]/95 backdrop-blur-md border-slate-800/80 shadow-lg shadow-black/40'
-          : 'bg-[#070a12]/80 backdrop-blur-sm border-slate-800/40'
+          ? 'bg-[#060810]/95 backdrop-blur-md border-[#1b243b] shadow-xl shadow-black/60'
+          : 'bg-[#060810]/90 border-[#151c30]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Brand Zone */}
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-3 sm:gap-6">
+        {/* Zone 1: Brand Wordmark & Monogram */}
         <button
           onClick={() => handleLinkClick('/')}
-          className="flex flex-col items-start group focus:outline-none text-left cursor-pointer shrink-0"
-          aria-label="Qivlix Home"
+          className="focus:outline-none text-left cursor-pointer shrink-0"
+          aria-label="Qivlix Home - Play Beyond Limits"
         >
-          <div className="flex items-center gap-1.5">
-            <span className="font-display font-black text-xl sm:text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-amber-400 group-hover:opacity-90 transition-opacity">
-              QIVLIX
-            </span>
-          </div>
-          <span className="text-[9px] font-mono tracking-tight text-slate-400 hidden sm:block">
-            The Daily Discovery Playground
-          </span>
+          <QivlixWordmark size="md" showTagline={true} />
         </button>
 
-        {/* Desktop Navigation (Zero-Pill clean typography) */}
+        {/* Zone 2: Desktop Navigation (Single-line, clean typography, electric lime active marker) */}
         <nav className="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
           {navLinks.map((link) => {
-            const isActive = currentPath === link.path;
+            const isActive = currentPath === link.path || (link.path === '/#games' && currentPath.startsWith('/game/'));
             return (
               <button
                 key={link.path}
                 onClick={() => handleLinkClick(link.path)}
-                className={`text-xs font-semibold tracking-wide transition-colors py-1 cursor-pointer relative ${
+                className={`text-xs font-semibold tracking-wide transition-colors py-1 cursor-pointer whitespace-nowrap relative ${
                   isActive
-                    ? 'text-cyan-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-cyan-400'
+                    ? 'text-[#ccff00] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#ccff00]'
                     : 'text-slate-300 hover:text-white'
                 }`}
               >
@@ -93,54 +86,57 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* Right Side Utility Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* Surprise Me Quick Trigger */}
+        {/* Zone 3: Utility Controls & Actions */}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* Surprise Me Quick Trigger (Electric Lime & Midnight Arcade Style) */}
           <button
             onClick={onOpenSurprise}
-            className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
-            aria-label="Surprise Me"
+            className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#0f1527] hover:bg-[#151c33] border border-[#ff5500]/50 hover:border-[#ff5500] text-[#ff6600] hover:text-[#ff7722] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs whitespace-nowrap"
+            aria-label="Surprise Me (Random Game Roulette)"
+            title="Roll random game"
           >
-            <Dices className="w-4 h-4 text-amber-400 shrink-0" />
+            <Dices className="w-3.5 h-3.5 text-[#ff5500] shrink-0" />
             <span className="hidden sm:inline">Surprise Me</span>
           </button>
 
           {/* Search Trigger */}
           <button
             onClick={onOpenSearch}
-            className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors cursor-pointer"
-            aria-label="Search activities"
+            className="p-2 rounded-lg bg-[#0f1527] border border-[#1b243b] text-slate-300 hover:text-white hover:border-[#2a375a] transition-colors cursor-pointer"
+            aria-label="Search games and guides"
+            title="Search (Command Palette)"
           >
-            <Search className="w-4 h-4" />
+            <Search className="w-3.5 h-3.5" />
           </button>
 
           {/* Sound Mute Toggle */}
           <button
             onClick={toggleSound}
-            className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl border transition-colors cursor-pointer ${
+            className={`p-2 rounded-lg border transition-colors cursor-pointer ${
               isMuted
-                ? 'bg-slate-900 border-slate-800 text-slate-500 hover:text-slate-300'
-                : 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20'
+                ? 'bg-[#0f1527] border-[#1b243b] text-slate-500 hover:text-slate-300'
+                : 'bg-[#ccff00]/10 border-[#ccff00]/40 text-[#ccff00] hover:bg-[#ccff00]/20'
             }`}
-            aria-label={isMuted ? 'Unmute procedural sound' : 'Mute procedural sound'}
+            aria-label={isMuted ? 'Unmute procedural sound effects' : 'Mute procedural sound effects'}
+            title={isMuted ? 'Sound: Muted' : 'Sound: Active'}
           >
-            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
           </button>
 
           {/* Mobile Hamburger Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="lg:hidden p-2 rounded-lg bg-[#0f1527] border border-[#1b243b] text-slate-300 hover:text-white transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer Navigation (Midnight Arcade Styling) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-800 bg-[#070a12]/98 backdrop-blur-xl px-4 py-6 space-y-2 animate-fadeIn">
+        <div className="lg:hidden border-t border-[#1b243b] bg-[#060810]/98 backdrop-blur-xl px-4 py-5 space-y-1.5 animate-fadeIn">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive = currentPath === link.path;
@@ -148,10 +144,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={link.path}
                 onClick={() => handleLinkClick(link.path)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-semibold transition-all cursor-pointer ${
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left text-xs font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
-                    : 'text-slate-300 hover:bg-slate-900 hover:text-white'
+                    ? 'bg-[#ccff00]/10 text-[#ccff00] border border-[#ccff00]/30'
+                    : 'text-slate-300 hover:bg-[#0f1527] hover:text-white'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -166,18 +162,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenSurprise();
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 text-amber-300 font-bold text-xs cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#0f1527] border border-[#ff5500]/50 text-[#ff6600] font-bold text-xs cursor-pointer"
             >
-              <Dices className="w-4 h-4 text-amber-400" />
-              <span>Surprise Me (Roll Random Activity)</span>
+              <Dices className="w-4 h-4 text-[#ff5500]" />
+              <span>Surprise Me (Roll Random Game)</span>
             </button>
           </div>
 
-          <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 px-2">
-            <span>Audio Procedural FX:</span>
+          <div className="pt-3 border-t border-[#1b243b] flex items-center justify-between text-xs text-slate-400 px-2">
+            <span className="font-mono text-[11px]">Procedural Audio FX:</span>
             <button
               onClick={toggleSound}
-              className="text-cyan-400 font-semibold cursor-pointer"
+              className="text-[#ccff00] font-semibold cursor-pointer text-xs"
             >
               {isMuted ? 'Muted (Tap to enable)' : 'Active (Tap to mute)'}
             </button>

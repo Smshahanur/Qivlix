@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getStoredProfile } from '../utils/progression';
 import { GAMES } from '../data/games';
-import { Zap, Play, Trophy, Sparkles, Filter, Clock } from 'lucide-react';
+import { Zap, Play, Trophy, Clock, ArrowRight } from 'lucide-react';
 import { AdPlaceholder } from '../components/AdPlaceholder';
 
 interface QuickPlayPageProps {
@@ -25,7 +25,7 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
       estimatedPlayTime: '1 min',
       difficulty: 'Casual' as const,
       targetPath: '/activity/reaction-rush',
-      badge: 'Quick Test'
+      badge: 'Benchmark'
     },
     {
       id: 'odd-one-out',
@@ -36,7 +36,7 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
       estimatedPlayTime: '2 min',
       difficulty: 'Intermediate' as const,
       targetPath: '/activity/odd-one-out',
-      badge: 'Speed Logic'
+      badge: 'Visual Logic'
     },
     {
       id: 'memory-grid',
@@ -47,7 +47,7 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
       estimatedPlayTime: '2 min',
       difficulty: 'Intermediate' as const,
       targetPath: '/activity/memory-grid',
-      badge: 'Sequence'
+      badge: 'Working Memory'
     }
   ];
 
@@ -72,33 +72,33 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12 space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1b243b]">
         <div>
-          <div className="flex items-center gap-2 text-xs text-amber-400 font-medium mb-1">
-            <Zap className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-mono text-[#ccff00] font-bold mb-1 uppercase tracking-wider">
+            <Zap className="w-4 h-4 text-[#ccff00]" />
             <span>Instant Entertainment</span>
-            <span aria-hidden="true">·</span>
-            <span>Zero Loading Delay</span>
-            <span aria-hidden="true">·</span>
-            <span className="text-cyan-400">Play Beyond Limits</span>
+            <span aria-hidden="true" className="text-slate-700">·</span>
+            <span className="text-[#ff6600]">Zero Loading Delay</span>
+            <span aria-hidden="true" className="text-slate-700">·</span>
+            <span className="text-slate-300">Play Beyond Limits</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">Quick Play Arena</h1>
-          <p className="text-sm text-slate-300 mt-1 max-w-xl">
+          <h1 className="text-3xl sm:text-4xl font-black text-[#fbfaf6] tracking-tight">Quick Play Arena</h1>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
             High-energy arcade, reflex, and spatial games built for instant fun. Play in quick 1-to-5 minute sessions on any phone or desktop with persistent browser scoring.
           </p>
         </div>
 
         {/* Filter Segmented Control */}
-        <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl self-start md:self-auto overflow-x-auto no-scrollbar max-w-full">
+        <div className="flex items-center gap-1 p-1 bg-[#0a0e1a] border border-[#1b243b] rounded-xl self-start md:self-auto overflow-x-auto no-scrollbar max-w-full">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase whitespace-nowrap transition-all cursor-pointer ${
                 filter === cat
-                  ? 'bg-amber-500 text-slate-950 shadow-sm'
+                  ? 'bg-[#ccff00] text-[#060810] shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -109,41 +109,41 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Grid of Games */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredGames.map((game) => {
           const pb = profile.personalBests[game.id];
           return (
             <div
               key={game.id}
-              className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between group shadow-lg hover:shadow-cyan-500/10"
+              className="p-5 sm:p-6 rounded-xl bg-[#0a0e1a] border border-[#1b243b] hover:border-[#ccff00] transition-colors flex flex-col justify-between group shadow-lg"
             >
               <div>
-                <div className="flex items-center justify-between mb-3 text-xs text-slate-400">
+                <div className="flex items-center justify-between mb-3 text-xs font-mono text-slate-400">
                   <div className="flex items-center gap-2">
-                    <span className="text-amber-400 font-medium">{game.category}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="flex items-center gap-1 font-mono text-[11px]">
+                    <span className="text-[#a3e635] font-semibold">{game.category}</span>
+                    <span aria-hidden="true" className="text-slate-700">·</span>
+                    <span className="flex items-center gap-1 text-[11px]">
                       <Clock className="w-3 h-3 text-slate-500" /> {game.estimatedPlayTime}
                     </span>
                   </div>
                   {game.badge && (
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700 font-mono">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-[#060810] text-[#ff6600] border border-[#ff5500]/40 font-bold">
                       {game.badge}
                     </span>
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
+                <h3 className="text-xl font-bold text-[#fbfaf6] group-hover:text-[#ccff00] transition-colors">
                   {game.title}
                 </h3>
                 <p className="text-xs text-slate-300 mt-2 leading-relaxed">{game.tagline}</p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="pt-6 mt-6 border-t border-[#1b243b] flex items-center justify-between">
                 <div>
                   {pb !== undefined ? (
-                    <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
-                      <Trophy className="w-3.5 h-3.5 text-amber-400" /> Best: {pb} {game.id.includes('reaction') ? 'ms' : 'pts'}
+                    <div className="text-[11px] font-mono text-[#ff6600] font-bold flex items-center gap-1">
+                      <Trophy className="w-3.5 h-3.5 text-[#ff5500]" /> Best: {pb} {game.id.includes('reaction') ? 'ms' : 'pts'}
                     </div>
                   ) : (
                     <span className="text-[11px] text-slate-500 font-mono">Unplayed</span>
@@ -152,7 +152,7 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
 
                 <button
                   onClick={() => onNavigate(game.targetPath)}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-xs shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 rounded-lg bg-[#ccff00] hover:bg-[#d9ff33] text-[#060810] font-black font-mono text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" /> Play Now
                 </button>
