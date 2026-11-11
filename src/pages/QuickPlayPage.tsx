@@ -1,86 +1,75 @@
 import React, { useState } from 'react';
 import { getStoredProfile } from '../utils/progression';
-import { Zap, Play, Trophy, Sparkles, Filter } from 'lucide-react';
+import { GAMES } from '../data/games';
+import { Zap, Play, Trophy, Sparkles, Filter, Clock } from 'lucide-react';
+import { AdPlaceholder } from '../components/AdPlaceholder';
 
 interface QuickPlayPageProps {
   onNavigate: (path: string) => void;
 }
 
-interface QuickGameItem {
-  id: string;
-  title: string;
-  tagline: string;
-  category: 'Reflex' | 'Arcade' | 'Spatial';
-  duration: string;
-  targetPath: string;
-  color: string;
-  isNew?: boolean;
-}
-
-const QUICK_GAMES: QuickGameItem[] = [
-  {
-    id: 'reaction-rush',
-    title: 'Reaction Rush',
-    tagline: 'Measure your reaction speed in milliseconds with high-precision sensory triggers.',
-    category: 'Reflex',
-    duration: '1 min',
-    targetPath: '/activity/reaction-rush',
-    color: 'from-amber-500/20 to-orange-500/20 border-amber-500/30',
-    isNew: true,
-  },
-  {
-    id: 'odd-one-out',
-    title: 'Odd One Out',
-    tagline: 'Rapid-fire visual categorization against a ticking 15-second clock.',
-    category: 'Reflex',
-    duration: '2 min',
-    targetPath: '/activity/odd-one-out',
-    color: 'from-purple-500/20 to-indigo-500/20 border-purple-500/30',
-    isNew: true,
-  },
-  {
-    id: 'snake',
-    title: 'Cyber Snake',
-    tagline: 'Glide through the neon matrix, collect power orbs, and grow without colliding.',
-    category: 'Arcade',
-    duration: '3 min',
-    targetPath: '/game/snake',
-    color: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30',
-  },
-  {
-    id: 'block-puzzle',
-    title: 'Block Puzzle',
-    tagline: 'Fit polyomino neon shapes onto the 10x10 cyber grid to blast line clears.',
-    category: 'Spatial',
-    duration: '3 min',
-    targetPath: '/game/block-puzzle',
-    color: 'from-cyan-500/20 to-blue-500/20 border-cyan-500/30',
-  },
-  {
-    id: 'neon-breakout',
-    title: 'Neon Breakout',
-    tagline: 'Paddle-deflect supersonic energy orbs to shatter defensive cyber barriers.',
-    category: 'Arcade',
-    duration: '2 min',
-    targetPath: '/game/neon-breakout',
-    color: 'from-rose-500/20 to-pink-500/20 border-rose-500/30',
-  },
-  {
-    id: 'cyber-flap',
-    title: 'Cyber Flap',
-    tagline: 'Navigate a photonic drone through narrow high-voltage data conduits.',
-    category: 'Arcade',
-    duration: '1 min',
-    targetPath: '/game/cyber-flap',
-    color: 'from-violet-500/20 to-fuchsia-500/20 border-violet-500/30',
-  },
-];
-
 export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
-  const [filter, setFilter] = useState<'All' | 'Reflex' | 'Arcade' | 'Spatial'>('All');
+  const [filter, setFilter] = useState<string>('All');
   const profile = getStoredProfile();
 
-  const filteredGames = QUICK_GAMES.filter((g) => filter === 'All' || g.category === filter);
+  const categories = ['All', 'Puzzle', 'Arcade', 'Reflex', 'Strategy', 'Memory', 'Word'];
+
+  // Add the quick activities alongside the full games library
+  const quickActivities = [
+    {
+      id: 'reaction-rush',
+      slug: 'reaction-rush',
+      title: 'Reaction Rush',
+      category: 'Reflex' as const,
+      tagline: 'Measure your reaction speed in milliseconds with high-precision sensory triggers.',
+      estimatedPlayTime: '1 min',
+      difficulty: 'Casual' as const,
+      targetPath: '/activity/reaction-rush',
+      badge: 'Quick Test'
+    },
+    {
+      id: 'odd-one-out',
+      slug: 'odd-one-out',
+      title: 'Odd One Out',
+      category: 'Reflex' as const,
+      tagline: 'Rapid-fire visual categorization against a ticking 15-second clock.',
+      estimatedPlayTime: '2 min',
+      difficulty: 'Intermediate' as const,
+      targetPath: '/activity/odd-one-out',
+      badge: 'Speed Logic'
+    },
+    {
+      id: 'memory-grid',
+      slug: 'memory-grid',
+      title: 'Memory Grid',
+      category: 'Memory' as const,
+      tagline: 'Ascending audio-visual sequence repetition to test working memory span.',
+      estimatedPlayTime: '2 min',
+      difficulty: 'Intermediate' as const,
+      targetPath: '/activity/memory-grid',
+      badge: 'Sequence'
+    }
+  ];
+
+  // Combined catalog
+  const fullCatalog = [
+    ...quickActivities,
+    ...GAMES.map((g) => ({
+      id: g.id,
+      slug: g.slug,
+      title: g.title,
+      category: g.category,
+      tagline: g.tagline,
+      estimatedPlayTime: g.estimatedPlayTime,
+      difficulty: g.difficulty,
+      targetPath: `/game/${g.slug}`,
+      badge: g.badge
+    }))
+  ];
+
+  const filteredGames = fullCatalog.filter(
+    (g) => filter === 'All' || g.category === filter
+  );
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
@@ -92,16 +81,18 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
             <span>Instant Entertainment</span>
             <span aria-hidden="true">·</span>
             <span>Zero Loading Delay</span>
+            <span aria-hidden="true">·</span>
+            <span className="text-cyan-400">Play Beyond Limits</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">Quick Play Arena</h1>
           <p className="text-sm text-slate-300 mt-1 max-w-xl">
-            High-energy arcade, reflex, and spatial games built for instant fun. Play in quick 1-to-3 minute sessions on any phone or desktop.
+            High-energy arcade, reflex, and spatial games built for instant fun. Play in quick 1-to-5 minute sessions on any phone or desktop with persistent browser scoring.
           </p>
         </div>
 
         {/* Filter Segmented Control */}
         <div className="flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl self-start md:self-auto overflow-x-auto no-scrollbar max-w-full">
-          {(['All', 'Reflex', 'Arcade', 'Spatial'] as const).map((cat) => (
+          {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
@@ -131,10 +122,14 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
                   <div className="flex items-center gap-2">
                     <span className="text-amber-400 font-medium">{game.category}</span>
                     <span aria-hidden="true">·</span>
-                    <span>{game.duration}</span>
+                    <span className="flex items-center gap-1 font-mono text-[11px]">
+                      <Clock className="w-3 h-3 text-slate-500" /> {game.estimatedPlayTime}
+                    </span>
                   </div>
-                  {game.isNew && (
-                    <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">New</span>
+                  {game.badge && (
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700 font-mono">
+                      {game.badge}
+                    </span>
                   )}
                 </div>
 
@@ -151,7 +146,7 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
                       <Trophy className="w-3.5 h-3.5 text-amber-400" /> Best: {pb} {game.id.includes('reaction') ? 'ms' : 'pts'}
                     </div>
                   ) : (
-                    <span className="text-[11px] text-slate-500">Unplayed</span>
+                    <span className="text-[11px] text-slate-500 font-mono">Unplayed</span>
                   )}
                 </div>
 
@@ -166,6 +161,8 @@ export const QuickPlayPage: React.FC<QuickPlayPageProps> = ({ onNavigate }) => {
           );
         })}
       </div>
+
+      <AdPlaceholder format="banner" slotId="quickplay-bottom-banner" />
     </div>
   );
 };

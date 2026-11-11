@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Gamepad2, Code2, Cpu, Sparkles, Shield, Heart, Instagram, ExternalLink, Mail } from 'lucide-react';
+import { Gamepad2, Code2, Cpu, Sparkles, Shield, Heart, Instagram, ExternalLink, Mail, BookOpen, Award, CheckCircle } from 'lucide-react';
 import { AdPlaceholder } from '../components/AdPlaceholder';
 
 const DEFAULT_AVATAR = '/assets/aistudio/20250326_100301_1__c7089703.jpg';
@@ -9,14 +9,14 @@ const CreatorProfileCard: React.FC = () => {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-purple-950/40 via-slate-900/90 to-cyan-950/40 border border-slate-800 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left relative overflow-hidden shadow-2xl">
+    <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-950/40 via-slate-900/90 to-cyan-950/40 border border-slate-800 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left relative overflow-hidden shadow-2xl">
       {/* Avatar Container with Glow */}
       <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-gradient-to-tr from-cyan-400 via-purple-500 to-fuchsia-500 p-0.5 shrink-0 shadow-xl shadow-purple-500/25">
         <div className="w-full h-full rounded-[14px] bg-[#0b101e] overflow-hidden flex items-center justify-center relative">
           {!imageError ? (
             <img
               src={DEFAULT_AVATAR}
-              alt="Shahanur Mollah - Creator of Qivlix"
+              alt="Shahanur Mollah - Creator and Architect of Qivlix"
               className="w-full h-full object-cover"
               onError={() => setImageError(true)}
             />
@@ -32,11 +32,11 @@ const CreatorProfileCard: React.FC = () => {
       <div className="space-y-2 flex-1">
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
           <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider font-semibold">
-            Lead Creator &amp; Architect
+            Founder &amp; Game Architect
           </span>
           <span className="text-[10px] text-slate-600 font-mono">·</span>
-          <span className="text-[11px] text-purple-400 font-mono font-medium">
-            Founder of Qivlix
+          <span className="text-[11px] text-amber-300 font-mono font-medium">
+            Tagline: Play Beyond Limits.
           </span>
         </div>
 
@@ -45,7 +45,7 @@ const CreatorProfileCard: React.FC = () => {
         </h3>
 
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-lg">
-          Passionate software engineer and game designer specializing in high-speed web interfaces, procedural algorithms, and modern interactive web graphics.
+          Software engineer, game architect, and creator of Qivlix. Dedicated to crafting lightning-fast, accessible browser games with zero bloat, high-fidelity audio, and clean, transparent ad practices.
         </p>
 
         {/* Action Buttons: Email and Instagram Profile */}
@@ -75,7 +75,6 @@ const CreatorProfileCard: React.FC = () => {
   );
 };
 
-
 interface AboutPageProps {
   onNavigate: (path: string) => void;
 }
@@ -92,7 +91,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           About Qivlix
         </h1>
         <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
-          The story behind Qivlix, founded and engineered by <span className="text-slate-200 font-semibold">Shahanur Mollah</span> with a single driving mission: <em className="text-cyan-300 not-italic">Play Beyond Limits.</em>
+          The story behind Qivlix, founded and engineered by <span className="text-slate-200 font-semibold">Shahanur Mollah</span> with a single driving mission: <em className="text-cyan-300 not-italic font-semibold">Play Beyond Limits.</em>
         </p>
       </div>
 
@@ -101,17 +100,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <section className="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
           <h2 className="font-display font-bold text-xl text-slate-100 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-purple-400" />
-            The Origin of Qivlix
+            The Origin &amp; Vision of Qivlix
           </h2>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            Modern internet gaming had become overwhelmed by 2-gigabyte mobile downloads, invasive ad walls that block gameplay every 30 seconds, forced registration screens, and stuttering web emulators.
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Modern internet gaming had become overwhelmed by 2-gigabyte mobile downloads, invasive interstitial ad walls that hijack screens every 30 seconds, forced registration barriers, and battery-draining bloatware.
           </p>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            <strong className="text-slate-200">Shahanur Mollah</strong> created Qivlix as a clean antidote to bloated app stores. Designed from the ground up to run natively within modern web browsers, Qivlix brings back the purest joy of gaming: click once, play instantly, master the mechanics, and compete against your own high scores.
+          <p className="text-slate-300 text-sm leading-relaxed">
+            <strong className="text-slate-100">Shahanur Mollah</strong> engineered Qivlix as a clean antidote to bloated app stores. Designed from the ground up to run natively within modern web browsers, Qivlix restores the purest joy of browser gaming: click once, play instantly, master game mechanics, and compete against your own high scores.
           </p>
         </section>
 
-        {/* Core Principles */}
+        {/* Creator Profile Box */}
+        <CreatorProfileCard />
+
+        {/* Core Architectural Principles */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-2">
             <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3">
@@ -121,7 +123,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               Zero Download Architecture
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Every single game runs on lightweight, high-performance HTML5, React, and Canvas code. Assets load in milliseconds without taxing your device's memory or battery.
+              Every single game runs on lightweight, high-performance HTML5, React, and Canvas code. Assets load in milliseconds without taxing your device&apos;s memory or battery.
             </p>
           </div>
 
@@ -133,23 +135,55 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               Unobtrusive Gaming Standards
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              We respect our players. Advertisements are placed cleanly outside active game viewports. You will never encounter unexpected pop-ups that interrupt your reaction test or block placement.
+              We respect our players. Advertisements are placed cleanly outside active game viewports. You will never encounter unexpected pop-ups or deceptive click triggers that interrupt your gameplay.
             </p>
           </div>
         </div>
 
-        {/* Creator Profile Box with Image Upload & Display */}
-        <CreatorProfileCard />
+        {/* Editorial Standards & Game Design Philosophy */}
+        <section className="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
+          <h2 className="font-display font-bold text-xl text-slate-100 flex items-center gap-2">
+            <Award className="w-5 h-5 text-amber-400" />
+            Editorial Rigor &amp; Strategy Guides
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Qivlix is more than just game engines—it is an educational strategy hub. We believe players have more fun when they understand the mathematical algorithms, spatial logic, and cognitive reflexes underlying each title.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs">
+              <div className="flex items-center gap-2 text-cyan-400 font-semibold mb-1">
+                <CheckCircle className="w-4 h-4" /> Original Strategy Walkthroughs
+              </div>
+              <p className="text-slate-400">
+                Detailed editorial guides explaining polyomino geometry, corner locks, and deduction patterns.
+              </p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs">
+              <div className="flex items-center gap-2 text-purple-400 font-semibold mb-1">
+                <CheckCircle className="w-4 h-4" /> Client-Side Privacy
+              </div>
+              <p className="text-slate-400">
+                High scores and settings persist in your browser local storage without invasive tracking cookies.
+              </p>
+            </div>
+          </div>
+        </section>
 
         <AdPlaceholder format="banner" slotId="about-mid-banner" />
 
-        {/* CTA to play */}
-        <div className="text-center pt-6">
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <button
             onClick={() => onNavigate('/#games')}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 hover:from-cyan-300 hover:to-cyan-200 transition-all cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-300 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 hover:from-cyan-300 hover:to-cyan-200 transition-all cursor-pointer"
           >
-            Explore All 10 Games Now
+            Explore All 10 Games
+          </button>
+          <button
+            onClick={() => onNavigate('/guides')}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 border border-purple-500/40 text-purple-300 hover:text-purple-200 hover:border-purple-500 font-bold text-sm transition-all cursor-pointer"
+          >
+            Read Game Strategy Guides
           </button>
         </div>
       </div>

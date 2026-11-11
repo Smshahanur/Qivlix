@@ -18,7 +18,10 @@ import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsOfUsePage } from './pages/TermsOfUsePage';
 import { SitemapPage } from './pages/SitemapPage';
+import { GuidesPage } from './pages/GuidesPage';
+import { GuideDetailPage } from './pages/GuideDetailPage';
 import { GAMES } from './data/games';
+import { GUIDES } from './data/guides';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -96,6 +99,16 @@ export default function App() {
       } else {
         document.title = 'Play Game — Qivlix';
       }
+    } else if (currentPath === '/guides') {
+      document.title = 'Game Strategy Guides & Walkthroughs — Qivlix';
+    } else if (currentPath.startsWith('/guides/')) {
+      const slug = currentPath.replace('/guides/', '');
+      const guide = GUIDES.find((g) => g.slug === slug);
+      if (guide) {
+        document.title = `${guide.title} | Qivlix Strategy Guide`;
+      } else {
+        document.title = 'Game Strategy Guide — Qivlix';
+      }
     } else if (currentPath === '/about') {
       document.title = 'About Qivlix — The Daily Discovery Playground';
     } else if (currentPath === '/contact') {
@@ -121,7 +134,14 @@ export default function App() {
       return <GameDetailPage slug={slug} onNavigate={navigate} />;
     }
 
+    if (currentPath.startsWith('/guides/')) {
+      const slug = currentPath.replace('/guides/', '');
+      return <GuideDetailPage slug={slug} onNavigate={navigate} />;
+    }
+
     switch (currentPath) {
+      case '/guides':
+        return <GuidesPage onNavigate={navigate} />;
       case '/daily':
         return <DailyPortalPage onNavigate={navigate} />;
       case '/quick-play':

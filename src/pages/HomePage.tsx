@@ -2,9 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { getDailyChallenge, getTodayDateStr } from '../utils/dailySystem';
 import { getStoredProfile, onProfileChange } from '../utils/progression';
 import { DISCOVERIES_VAULT } from '../data/playgroundContent';
-import { GAMES } from '../data/games';
+import { GAMES, CATEGORIES } from '../data/games';
+import { GUIDES } from '../data/guides';
 import { UserProfile, DailyChallengeData } from '../types/playground';
-import { Sparkles, Dices, Flame, Trophy, Play, ArrowRight, Brain, Zap, Search, HelpCircle, Compass, CheckCircle2, Circle, Clock } from 'lucide-react';
+import { GameCategory } from '../types/game';
+import {
+  Sparkles,
+  Dices,
+  Flame,
+  Trophy,
+  Play,
+  ArrowRight,
+  Brain,
+  Zap,
+  Search,
+  HelpCircle,
+  Compass,
+  CheckCircle2,
+  Circle,
+  Clock,
+  BookOpen,
+  Gamepad2,
+  Filter
+} from 'lucide-react';
+import { AdPlaceholder } from '../components/AdPlaceholder';
 
 interface HomePageProps {
   onSelectGame: (slug: string) => void;
@@ -21,6 +42,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   const [profile, setProfile] = useState<UserProfile>(getStoredProfile);
   const [dailyData, setDailyData] = useState<DailyChallengeData>(() => getDailyChallenge());
+  const [activeCategory, setActiveCategory] = useState<GameCategory>('All');
 
   useEffect(() => {
     return onProfileChange((updated) => setProfile(updated));
@@ -34,16 +56,15 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
   const completedCount = todayProgress.completedActivityIds.length;
 
-  // Curated featured games & activities
-  const featuredQuick = [
-    { id: 'reaction-rush', title: 'Reaction Rush', category: 'Reflex Speed', desc: 'Millisecond reflex benchmark with sensory cues.', path: '/activity/reaction-rush', color: 'from-amber-500/20 to-orange-500/20' },
-    { id: 'memory-grid', title: 'Memory Grid', category: 'Working Memory', desc: 'Ascending audio-visual sequence repetition.', path: '/activity/memory-grid', color: 'from-cyan-500/20 to-blue-500/20' },
-    { id: 'odd-one-out', title: 'Odd One Out', category: 'Visual Logic', desc: 'Spot the anomalous classification against the clock.', path: '/activity/odd-one-out', color: 'from-purple-500/20 to-indigo-500/20' },
-    { id: 'block-puzzle', title: 'Block Puzzle', category: 'Spatial Matrix', desc: '10x10 polyomino line clear strategy.', path: '/game/block-puzzle', color: 'from-emerald-500/20 to-teal-500/20' },
-  ];
+  // Filtered 10-Game Library
+  const filteredGames = GAMES.filter(
+    (g) => activeCategory === 'All' || g.category === activeCategory
+  );
 
   // Daily Discovery highlight (deterministic by date)
-  const discIndex = Math.abs(todayStr.split('-').reduce((acc, part) => acc + parseInt(part, 10), 0)) % DISCOVERIES_VAULT.length;
+  const discIndex =
+    Math.abs(todayStr.split('-').reduce((acc, part) => acc + parseInt(part, 10), 0)) %
+    DISCOVERIES_VAULT.length;
   const discoveryOfTheDay = DISCOVERIES_VAULT[discIndex];
 
   return (
@@ -64,9 +85,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>Qivlix Playground</span>
                 </div>
                 <span aria-hidden="true" className="hidden sm:inline text-slate-600">·</span>
-                <span className="text-slate-300">The Daily Discovery Playground</span>
+                <span className="text-amber-300 font-semibold">Play Beyond Limits.</span>
                 <span aria-hidden="true" className="hidden sm:inline text-slate-600">·</span>
-                <span className="text-purple-400">All-Ages Browser Entertainment</span>
+                <span className="text-purple-400">By Shahanur Mollah</span>
               </div>
 
               <h1 className="font-display font-black text-[clamp(1.85rem,6.8vw,3.75rem)] text-slate-100 tracking-tight leading-[1.08] text-balance">
@@ -77,31 +98,30 @@ export const HomePage: React.FC<HomePageProps> = ({
               </h1>
 
               <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-xl leading-relaxed">
-                Step into a distinctive browser playground of quick games, daily mysteries, cognitive workouts, and fascinating scientific curiosities.
+                Step into a distinctive browser playground of quick games, in-depth strategy guides, daily mysteries, cognitive workouts, and fascinating scientific curiosities.
               </p>
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2 w-full sm:w-auto">
                 <button
-                  onClick={() => onNavigate('/daily')}
+                  onClick={() => onNavigate('/#games')}
                   className="px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
+                >
+                  <Gamepad2 className="w-4 h-4" /> Play All 10 Games
+                </button>
+
+                <button
+                  onClick={() => onNavigate('/daily')}
+                  className="px-4 sm:px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-cyan-500/40 text-cyan-300 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md w-full sm:w-auto"
                 >
                   Enter Daily Portal <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button
                   onClick={onOpenSurprise}
-                  className="px-4 sm:px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md w-full sm:w-auto"
+                  className="px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md w-full sm:w-auto"
                 >
                   <Dices className="w-4 h-4 text-amber-400" /> Surprise Me
-                </button>
-
-                <button
-                  onClick={onOpenSearch}
-                  className="px-4 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-850 border border-slate-800 text-slate-400 hover:text-slate-200 text-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer w-full sm:w-auto"
-                  aria-label="Search"
-                >
-                  <Search className="w-4 h-4" /> Search
                 </button>
               </div>
 
@@ -112,7 +132,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <Flame className="w-4 h-4 shrink-0" /> {profile.streak} Day Streak
                   </div>
                   <div className="flex items-center gap-1.5 text-cyan-400 font-medium pt-2 sm:pt-0 sm:pl-4">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" /> {completedCount} of 3 Daily Portal Tasks Done
+                    <CheckCircle2 className="w-4 h-4 shrink-0" /> {completedCount} of 3 Daily Tasks Done
                   </div>
                   <div className="text-slate-300 font-mono pt-2 sm:pt-0 sm:pl-4">
                     {profile.points} Total XP
@@ -144,7 +164,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs text-slate-400 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-0">
                     <span>Weekly Theme: {dailyData.weeklyTheme.title}</span>
-                    <span className="text-amber-400">Deterministic</span>
+                    <span className="text-amber-400">Deterministic Challenge</span>
                   </div>
 
                   <button
@@ -161,7 +181,171 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* Main Content Sections */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        {/* Playable Games Directory (#games anchor) */}
+        <section id="games" className="space-y-6 scroll-mt-20">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-5">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-cyan-400">
+                <Gamepad2 className="w-4 h-4" />
+                <span>Instant Browser Gaming Arena</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1">
+                All 10 Free Playable Games
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
+                Zero installations, zero loading delays, and zero intrusive ad walls. Play instantly in your browser with local high-score tracking.
+              </p>
+            </div>
+
+            {/* Category Filter Buttons */}
+            <div className="flex items-center gap-1.5 p-1 bg-slate-900 border border-slate-800 rounded-xl overflow-x-auto no-scrollbar max-w-full">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                    activeCategory === cat
+                      ? 'bg-cyan-500 text-slate-950 shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 10 Games Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {filteredGames.map((game) => (
+              <div
+                key={game.id}
+                className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col justify-between group shadow-lg hover:shadow-cyan-500/10"
+              >
+                <div>
+                  {/* Thumbnail / Visual Badge */}
+                  <div className="aspect-[16/10] rounded-xl overflow-hidden bg-slate-800 mb-3.5 relative">
+                    <img
+                      src={game.thumbnail}
+                      alt={game.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-slate-950/80 backdrop-blur-sm border border-slate-800 text-[10px] font-mono text-cyan-400 font-semibold">
+                      {game.category}
+                    </div>
+                    {game.badge && (
+                      <div className="absolute top-2 right-2 px-2 py-0.5 rounded bg-purple-500/80 backdrop-blur-sm text-[10px] font-semibold text-white">
+                        {game.badge}
+                      </div>
+                    )}
+                  </div>
+
+                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    {game.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-300 mt-1 line-clamp-2 leading-relaxed">
+                    {game.tagline}
+                  </p>
+
+                  <div className="flex items-center gap-3 text-[11px] font-mono text-slate-400 mt-2.5">
+                    <span>{game.difficulty}</span>
+                    <span>·</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-slate-500" /> {game.estimatedPlayTime}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between">
+                  {game.guideSlug ? (
+                    <button
+                      onClick={() => onNavigate(`/guides/${game.guideSlug}`)}
+                      className="text-[11px] text-purple-400 hover:text-purple-300 hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <BookOpen className="w-3 h-3" /> Guide
+                    </button>
+                  ) : (
+                    <span className="text-[11px] text-slate-500 font-mono">Instant Play</span>
+                  )}
+
+                  <button
+                    onClick={() => onSelectGame(game.slug)}
+                    className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-bold text-xs flex items-center gap-1 shadow-sm transition-all cursor-pointer"
+                  >
+                    <Play className="w-3 h-3 fill-current" /> Play Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Strategy Guides & Master Walkthroughs Showcase */}
+        <section className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-purple-500/30 space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-purple-400">
+                <BookOpen className="w-4 h-4" />
+                <span>Original Editorial Content</span>
+              </div>
+              <h2 className="text-2xl font-black text-white tracking-tight mt-0.5">
+                Gaming Strategy Guides &amp; Walkthroughs
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl leading-relaxed">
+                In-depth mathematical breakdowns, polyomino spatial management, and corner-lock execution written by founder Shahanur Mollah.
+              </p>
+            </div>
+
+            <button
+              onClick={() => onNavigate('/guides')}
+              className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5 self-start md:self-auto cursor-pointer"
+            >
+              <span>View All 5 Guides</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {GUIDES.slice(0, 3).map((guide) => (
+              <div
+                key={guide.id}
+                className="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-purple-500/40 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
+                    <span className="text-purple-400 font-mono font-medium">{guide.category}</span>
+                    <span className="text-[11px] text-slate-500">{guide.readTime}</span>
+                  </div>
+
+                  <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-purple-300 transition-colors leading-snug">
+                    {guide.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
+                    {guide.summary}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between">
+                  <span className="text-[11px] text-slate-400 font-mono">By {guide.author}</span>
+                  <button
+                    onClick={() => onNavigate(`/guides/${guide.slug}`)}
+                    className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Read</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Daily Portal Preview Row */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
@@ -227,54 +411,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
         </section>
 
-        {/* Featured Mini-Games and Brain Puzzles */}
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-xs text-purple-400 font-semibold uppercase tracking-wider">
-                Instant Play Library
-              </div>
-              <h2 className="text-2xl font-black text-white tracking-tight mt-0.5">
-                Featured Mini-Games & Brain Puzzles
-              </h2>
-            </div>
-
-            <button
-              onClick={() => onNavigate('/quick-play')}
-              className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1 cursor-pointer"
-            >
-              Browse All Quick Games <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {featuredQuick.map((item) => (
-              <div
-                key={item.id}
-                className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between group shadow-md"
-              >
-                <div>
-                  <div className="text-xs text-amber-400 font-medium mb-1">{item.category}</div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-slate-300 mt-2 leading-relaxed">{item.desc}</p>
-                </div>
-
-                <div className="pt-4 mt-4 border-t border-slate-800 flex justify-end">
-                  <button
-                    onClick={() => onNavigate(item.path)}
-                    className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs flex items-center gap-1 cursor-pointer"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" /> Play Now
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* New Discoveries & Interesting Facts Preview */}
+        {/* Discovery of the Day Preview */}
         <section className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-900/80 border border-purple-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-2 text-xs text-purple-400 font-bold uppercase tracking-wider">
@@ -375,6 +512,8 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
         </section>
+
+        <AdPlaceholder format="banner" slotId="home-bottom-banner" />
       </div>
     </div>
   );

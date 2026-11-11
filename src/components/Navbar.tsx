@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Search, Menu, X, Dices, Heart, Trophy, Compass, Zap, Brain, Calendar, Home } from 'lucide-react';
+import { Volume2, VolumeX, Search, Menu, X, Dices, Heart, Trophy, Compass, Zap, Brain, Calendar, Home, BookOpen } from 'lucide-react';
 import { sound } from '../utils/audio';
 
 interface NavbarProps {
@@ -37,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Daily Portal', path: '/daily', icon: Calendar },
     { label: 'Quick Play', path: '/quick-play', icon: Zap },
     { label: 'Brain Lab', path: '/brain-lab', icon: Brain },
+    { label: 'Guides', path: '/guides', icon: BookOpen },
     { label: 'Discover', path: '/discover', icon: Compass },
     { label: 'My Collection', path: '/collection', icon: Trophy },
     { label: 'Favorites', path: '/favorites', icon: Heart },
