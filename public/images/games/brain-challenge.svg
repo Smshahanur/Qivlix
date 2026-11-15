@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Brain Challenge Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="bc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0e1427"/>
+    </linearGradient>
+    <pattern id="bc-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="bc-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bc-bg)"/>
+  <rect width="800" height="500" fill="url(#bc-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- Geometric Neural Network Hexagons -->
+  <g stroke="#1b243b" stroke-width="2" fill="#0a0e1a">
+    <polygon points="400,82 520,150 520,288 400,356 280,288 280,150"/>
+  </g>
+
+  <!-- Synaptic Connection Paths -->
+  <g stroke="#ccff00" stroke-width="2.5" opacity="0.65">
+    <line x1="400" y1="120" x2="318" y2="180"/>
+    <line x1="400" y1="120" x2="482" y2="180"/>
+    <line x1="318" y1="180" x2="400" y2="220"/>
+    <line x1="482" y1="180" x2="400" y2="220"/>
+    <line x1="318" y1="180" x2="318" y2="270"/>
+    <line x1="482" y1="180" x2="482" y2="270"/>
+    <line x1="400" y1="220" x2="400" y2="318"/>
+    <line x1="318" y1="270" x2="400" y2="318"/>
+    <line x1="482" y1="270" x2="400" y2="318"/>
+  </g>
+
+  <!-- Logic Nodes -->
+  <g filter="url(#bc-glow)">
+    <circle cx="400" cy="120" r="14" fill="#ccff00"/>
+    <circle cx="318" cy="180" r="12" fill="#0a0e1a" stroke="#ccff00" stroke-width="3"/>
+    <circle cx="482" cy="180" r="12" fill="#0a0e1a" stroke="#ccff00" stroke-width="3"/>
+    <circle cx="400" cy="220" r="22" fill="#ff5500" stroke="#fbfaf6" stroke-width="3"/>
+    <circle cx="318" cy="270" r="12" fill="#0a0e1a" stroke="#ff5500" stroke-width="3"/>
+    <circle cx="482" cy="270" r="12" fill="#0a0e1a" stroke="#ff5500" stroke-width="3"/>
+    <circle cx="400" cy="318" r="14" fill="#ccff00"/>
+  </g>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">BRAIN CHALLENGE // COGNITIVE LAB</text>
+</svg>

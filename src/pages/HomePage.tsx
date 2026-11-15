@@ -7,6 +7,7 @@ import { GUIDES } from '../data/guides';
 import { UserProfile, DailyChallengeData } from '../types/playground';
 import { GameCategory } from '../types/game';
 import { GameCard } from '../components/GameCard';
+import { GameThumbnail } from '../components/GameThumbnail';
 import { QivlixSymbol, QivlixArcadeBadge } from '../components/BrandLogo';
 import {
   Play,
@@ -165,9 +166,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 {/* Spotlight Artwork */}
                 <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-[#060810] border border-[#1b243b] mb-4">
-                  <img
+                  <GameThumbnail
                     src={spotlightGame.thumbnail}
-                    alt={spotlightGame.title}
+                    alt={`${spotlightGame.title} — Arcade Spotlight`}
+                    title={spotlightGame.title}
+                    category={spotlightGame.category}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#060810] via-transparent to-transparent opacity-70" />

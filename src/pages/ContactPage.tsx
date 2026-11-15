@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, MessageSquare, Send, CheckCircle2, User, HelpCircle, Sparkles, Instagram, ExternalLink } from 'lucide-react';
 import { sound } from '../utils/audio';
+import { QivlixSymbol } from '../components/BrandLogo';
 
 const DEFAULT_AVATAR = '/assets/aistudio/20250326_100301_1__c7089703.jpg';
 const INSTAGRAM_URL = 'https://www.instagram.com/shahanurmollah__?exln=MTl6cTdzMmwyYWx3dA==';
@@ -13,6 +14,7 @@ export const ContactPage: React.FC = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,11 +143,19 @@ export const ContactPage: React.FC = () => {
         <div className="md:col-span-5 space-y-6">
           <div className="p-6 rounded-xl bg-[#0a0e1a] border border-[#1b243b] space-y-4">
             <div className="flex items-center gap-3">
-              <img
-                src={DEFAULT_AVATAR}
-                alt="Shahanur Mollah"
-                className="w-12 h-12 rounded-lg object-cover border border-[#ccff00]/40"
-              />
+              {!avatarError ? (
+                <img
+                  src={DEFAULT_AVATAR}
+                  alt="Shahanur Mollah"
+                  referrerPolicy="no-referrer"
+                  onError={() => setAvatarError(true)}
+                  className="w-12 h-12 rounded-lg object-cover border border-[#ccff00]/40"
+                />
+              ) : (
+                <div className="w-12 h-12 rounded-lg bg-[#060810] border border-[#ccff00]/40 flex items-center justify-center">
+                  <QivlixSymbol size={28} />
+                </div>
+              )}
               <div>
                 <h3 className="font-display font-bold text-base text-[#fbfaf6]">
                   Shahanur Mollah

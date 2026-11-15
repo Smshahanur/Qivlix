@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Memory Match Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="mm-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0e1427"/>
+    </linearGradient>
+    <pattern id="mm-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="mm-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#mm-bg)"/>
+  <rect width="800" height="500" fill="url(#mm-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- Back row face-down holographic cards -->
+  <g fill="#0a0e1a" stroke="#1b243b" stroke-width="2">
+    <rect x="130" y="74" width="118" height="148" rx="12"/>
+    <rect x="272" y="74" width="118" height="148" rx="12"/>
+    <rect x="414" y="74" width="118" height="148" rx="12"/>
+    <rect x="556" y="74" width="118" height="148" rx="12"/>
+    <rect x="130" y="246" width="118" height="148" rx="12"/>
+    <rect x="414" y="246" width="118" height="148" rx="12"/>
+  </g>
+
+  <!-- Subtle card back geometric chevrons -->
+  <g fill="none" stroke="#1e293b" stroke-width="2">
+    <polygon points="189,122 214,148 189,174 164,148"/>
+    <polygon points="473,122 498,148 473,174 448,148"/>
+    <polygon points="189,294 214,320 189,346 164,320"/>
+    <polygon points="473,294 498,320 473,346 448,320"/>
+  </g>
+
+  <!-- Sync Beam Connecting Matched Cards -->
+  <path d="M331 148 C 430 148, 520 260, 615 320" fill="none" stroke="#ccff00" stroke-width="3" stroke-dasharray="8 6" filter="url(#mm-glow)"/>
+
+  <!-- Matched Card 1 (Top Row, #2) -->
+  <g filter="url(#mm-glow)">
+    <rect x="272" y="74" width="118" height="148" rx="12" fill="#11192e" stroke="#ccff00" stroke-width="2.5"/>
+    <polygon points="331,110 364,148 331,186 298,148" fill="none" stroke="#ccff00" stroke-width="4"/>
+    <circle cx="331" cy="148" r="11" fill="#ff5500"/>
+  </g>
+
+  <!-- Matched Card 2 (Bottom Row, #4) -->
+  <g filter="url(#mm-glow)">
+    <rect x="556" y="246" width="118" height="148" rx="12" fill="#11192e" stroke="#ccff00" stroke-width="2.5"/>
+    <polygon points="615,282 648,320 615,358 582,320" fill="none" stroke="#ccff00" stroke-width="4"/>
+    <circle cx="615" cy="320" r="11" fill="#ff5500"/>
+  </g>
+
+  <!-- Active Hover Card 3 (Bottom Row, #2) -->
+  <g>
+    <rect x="272" y="246" width="118" height="148" rx="12" fill="#13192c" stroke="#ff5500" stroke-width="2"/>
+    <circle cx="331" cy="320" r="24" fill="none" stroke="#ff5500" stroke-width="3"/>
+    <path d="M320 320 H342 M331 309 V331" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">MEMORY MATCH // RELIC PAIRS</text>
+</svg>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Trophy, Clock, ArrowRight } from 'lucide-react';
 import { GameInfo } from '../types/game';
+import { GameThumbnail } from './GameThumbnail';
 
 interface GameCardProps {
   game: GameInfo;
@@ -30,18 +31,12 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onPlay, featured = fal
       <div>
         {/* Thumbnail Viewport with Arcade Bezel Frame */}
         <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-[#060810] border border-[#1b243b] mb-4">
-          <img
+          <GameThumbnail
             src={game.thumbnail}
             alt={game.title}
+            title={game.title}
+            category={game.category}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-              const parent = target.parentElement;
-              if (parent) {
-                parent.classList.add('bg-[#0f1527]');
-              }
-            }}
           />
 
           {/* Scrim Overlay */}

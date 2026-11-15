@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Mystery Picture Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="mp-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0d1324"/>
+    </linearGradient>
+    <pattern id="mp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="mp-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#mp-bg)"/>
+  <rect width="800" height="500" fill="url(#mp-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- Classified Mosaic Frame -->
+  <rect x="210" y="68" width="380" height="300" rx="14" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+
+  <!-- Concealed Mosaic Blocks -->
+  <g>
+    <rect x="234" y="92" width="76" height="56" rx="4" fill="#141c31"/>
+    <rect x="318" y="92" width="76" height="56" rx="4" fill="#18223a"/>
+    <rect x="402" y="92" width="76" height="56" rx="4" fill="#141c31"/>
+    <rect x="486" y="92" width="76" height="56" rx="4" fill="#18223a"/>
+
+    <rect x="234" y="156" width="76" height="56" rx="4" fill="#18223a"/>
+    <rect x="318" y="156" width="76" height="56" rx="4" fill="#ccff00" fill-opacity="0.22" stroke="#ccff00" stroke-width="2"/>
+    <rect x="402" y="156" width="76" height="56" rx="4" fill="#ff5500" fill-opacity="0.25" stroke="#ff5500" stroke-width="2"/>
+    <rect x="486" y="156" width="76" height="56" rx="4" fill="#141c31"/>
+
+    <rect x="234" y="220" width="76" height="56" rx="4" fill="#141c31"/>
+    <rect x="318" y="220" width="76" height="56" rx="4" fill="#ff5500" fill-opacity="0.22" stroke="#ff5500" stroke-width="2"/>
+    <rect x="402" y="220" width="76" height="56" rx="4" fill="#ccff00" fill-opacity="0.25" stroke="#ccff00" stroke-width="2"/>
+    <rect x="486" y="220" width="76" height="56" rx="4" fill="#18223a"/>
+
+    <rect x="234" y="284" width="76" height="56" rx="4" fill="#18223a"/>
+    <rect x="318" y="284" width="76" height="56" rx="4" fill="#141c31"/>
+    <rect x="402" y="284" width="76" height="56" rx="4" fill="#18223a"/>
+    <rect x="486" y="284" width="76" height="56" rx="4" fill="#141c31"/>
+  </g>
+
+  <!-- Scanning Magnifier Lens -->
+  <g filter="url(#mp-glow)">
+    <circle cx="400" cy="216" r="76" fill="#060810" fill-opacity="0.5" stroke="#ccff00" stroke-width="4"/>
+    <circle cx="400" cy="216" r="56" fill="none" stroke="#ff5500" stroke-width="2" stroke-dasharray="6 4"/>
+    <polygon points="400,178 428,216 400,254 372,216" fill="#ccff00"/>
+    <line x1="454" y1="270" x2="508" y2="324" stroke="#ccff00" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">MYSTERY PICTURE // VISUAL DECRYPT</text>
+</svg>

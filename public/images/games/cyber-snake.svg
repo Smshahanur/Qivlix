@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Cyber Snake Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="cs-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <pattern id="cs-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#141d32" stroke-width="1"/>
+    </pattern>
+    <filter id="cs-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#cs-bg)"/>
+  <rect width="800" height="500" fill="url(#cs-grid)"/>
+
+  <!-- Arena Frame -->
+  <rect x="90" y="54" width="620" height="350" rx="14" fill="#0a0e1a" fill-opacity="0.82" stroke="#1b243b" stroke-width="2"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- Serpent Trail Halo -->
+  <path d="M168 320 H348 V196 H472 V278 H576" fill="none" stroke="#ccff00" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" opacity="0.16" filter="url(#cs-glow)"/>
+
+  <!-- Segmented Serpent Body -->
+  <g filter="url(#cs-glow)">
+    <rect x="150" y="302" width="34" height="34" rx="8" fill="#65a30d" opacity="0.55"/>
+    <rect x="190" y="302" width="34" height="34" rx="8" fill="#84cc16" opacity="0.7"/>
+    <rect x="230" y="302" width="34" height="34" rx="8" fill="#a3e635" opacity="0.82"/>
+    <rect x="270" y="302" width="34" height="34" rx="8" fill="#a3e635" opacity="0.9"/>
+    <rect x="310" y="302" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="330" y="262" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="330" y="222" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="330" y="178" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="372" y="178" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="414" y="178" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="454" y="178" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="454" y="220" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="454" y="260" width="34" height="34" rx="8" fill="#ccff00"/>
+    <rect x="496" y="260" width="34" height="34" rx="8" fill="#ccff00"/>
+    <!-- Snake Head -->
+    <rect x="538" y="256" width="42" height="42" rx="10" fill="#d9ff33" stroke="#fbfaf6" stroke-width="2"/>
+  </g>
+
+  <!-- Snake Head Cyber Eyes -->
+  <rect x="564" y="266" width="8" height="8" rx="2" fill="#060810"/>
+  <rect x="564" y="282" width="8" height="8" rx="2" fill="#060810"/>
+
+  <!-- Target Energy Core (Vivid Orange) -->
+  <g filter="url(#cs-glow)">
+    <circle cx="642" cy="277" r="24" fill="#ff5500" opacity="0.22"/>
+    <circle cx="642" cy="277" r="14" fill="#ff5500"/>
+    <circle cx="642" cy="277" r="6" fill="#fbfaf6"/>
+  </g>
+
+  <!-- Secondary Bonus Orb -->
+  <circle cx="230" cy="140" r="11" fill="#ff6600" opacity="0.85"/>
+  <circle cx="230" cy="140" r="20" fill="none" stroke="#ff6600" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">CYBER SNAKE // VECTOR MATRIX</text>
+</svg>

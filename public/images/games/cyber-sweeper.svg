@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Cyber Sweeper Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="csw-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0d1324"/>
+    </linearGradient>
+    <pattern id="csw-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="csw-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#csw-bg)"/>
+  <rect width="800" height="500" fill="url(#csw-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- 5x4 Tactical Sweeper Grid -->
+  <rect x="195" y="64" width="410" height="330" rx="14" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+
+  <!-- Cells -->
+  <g stroke="#1b243b" stroke-width="2">
+    <!-- Row 1 -->
+    <rect x="215" y="84" width="66" height="66" rx="8" fill="#151d33"/>
+    <rect x="291" y="84" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="367" y="84" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="443" y="84" width="66" height="66" rx="8" fill="#151d33"/>
+    <rect x="519" y="84" width="66" height="66" rx="8" fill="#151d33"/>
+    <!-- Row 2 -->
+    <rect x="215" y="160" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="291" y="160" width="66" height="66" rx="8" fill="#121c2d" stroke="#ccff00"/>
+    <rect x="367" y="160" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="443" y="160" width="66" height="66" rx="8" fill="#1f1116" stroke="#ff5500"/>
+    <rect x="519" y="160" width="66" height="66" rx="8" fill="#151d33"/>
+    <!-- Row 3 -->
+    <rect x="215" y="236" width="66" height="66" rx="8" fill="#151d33"/>
+    <rect x="291" y="236" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="367" y="236" width="66" height="66" rx="8" fill="#251013" stroke="#ff5500"/>
+    <rect x="443" y="236" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="519" y="236" width="66" height="66" rx="8" fill="#151d33"/>
+    <!-- Row 4 -->
+    <rect x="215" y="312" width="66" height="66" rx="8" fill="#151d33"/>
+    <rect x="291" y="312" width="66" height="66" rx="8" fill="#151d33"/>
+    <rect x="367" y="312" width="66" height="66" rx="8" fill="#0f1527"/>
+    <rect x="443" y="312" width="66" height="66" rx="8" fill="#151d33"/>
+    <rect x="519" y="312" width="66" height="66" rx="8" fill="#151d33"/>
+  </g>
+
+  <!-- Radar Numbers -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="900" text-anchor="middle">
+    <text x="324" y="128" fill="#a3e635">1</text>
+    <text x="400" y="128" fill="#ccff00">2</text>
+    <text x="248" y="204" fill="#a3e635">1</text>
+    <text x="400" y="204" fill="#ff6600">3</text>
+    <text x="324" y="280" fill="#ccff00">2</text>
+    <text x="476" y="280" fill="#a3e635">1</text>
+    <text x="400" y="356" fill="#ccff00">1</text>
+  </g>
+
+  <!-- Electric Lime Disarm Flag -->
+  <g filter="url(#csw-glow)">
+    <line x1="312" y1="176" x2="312" y2="212" stroke="#fbfaf6" stroke-width="3.5" stroke-linecap="round"/>
+    <polygon points="314,176 344,187 314,198" fill="#ccff00"/>
+  </g>
+
+  <!-- Vivid Orange Armed Hazard Node -->
+  <g filter="url(#csw-glow)">
+    <circle cx="476" cy="193" r="14" fill="#ff5500"/>
+    <path d="M476 172 V214 M455 193 H497 M461 178 L491 208 M491 178 L461 208" stroke="#ff5500" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="472" cy="189" r="4" fill="#fbfaf6"/>
+  </g>
+
+  <!-- Secondary Flagged Mine (Row 3 Col 3) -->
+  <g filter="url(#csw-glow)">
+    <line x1="388" y1="252" x2="388" y2="288" stroke="#fbfaf6" stroke-width="3.5" stroke-linecap="round"/>
+    <polygon points="390,252 420,263 390,274" fill="#ff5500"/>
+  </g>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">CYBER SWEEPER // DEDUCTION GRID</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Reaction Rush Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="rr-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0c1324"/>
+    </linearGradient>
+    <pattern id="rr-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="rr-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#rr-bg)"/>
+  <rect width="800" height="500" fill="url(#rr-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- Concentric Reflex Radar -->
+  <circle cx="400" cy="230" r="158" fill="none" stroke="#1b243b" stroke-width="2" stroke-dasharray="10 6"/>
+  <circle cx="400" cy="230" r="122" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.4"/>
+  <circle cx="400" cy="230" r="88" fill="#0a0e1a" stroke="#ff5500" stroke-width="3" filter="url(#rr-glow)"/>
+
+  <!-- Lightning Trigger Bolt -->
+  <polygon points="416,162 372,232 404,232 384,296 436,216 402,216" fill="#ccff00" filter="url(#rr-glow)"/>
+
+  <!-- Telemetry Side Wings -->
+  <rect x="78" y="182" width="136" height="96" rx="10" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+  <text x="146" y="212" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">LATENCY</text>
+  <text x="146" y="252" fill="#ccff00" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="900" text-anchor="middle">168ms</text>
+
+  <rect x="586" y="182" width="136" height="96" rx="10" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+  <text x="654" y="212" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" letter-spacing="2" text-anchor="middle">TIER</text>
+  <text x="654" y="252" fill="#ff5500" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" text-anchor="middle">GODLIKE</text>
+
+  <!-- Waveform Pulse Line -->
+  <polyline points="214,230 242,230 256,198 272,262 288,230 312,230" fill="none" stroke="#ff5500" stroke-width="2.5"/>
+  <polyline points="488,230 512,230 528,198 544,262 558,230 586,230" fill="none" stroke="#ccff00" stroke-width="2.5"/>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">REACTION TEST // MILLISECOND BENCHMARK</text>
+</svg>

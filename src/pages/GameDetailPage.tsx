@@ -26,6 +26,7 @@ import { GAMES } from '../data/games';
 import { GameInfo } from '../types/game';
 import { sound } from '../utils/audio';
 import { AdPlaceholder } from '../components/AdPlaceholder';
+import { GameThumbnail } from '../components/GameThumbnail';
 
 // Individual games
 import { BlockPuzzleGame } from '../components/games/BlockPuzzleGame';
@@ -508,13 +509,13 @@ export const GameDetailPage: React.FC<GameDetailPageProps> = ({ slug, onNavigate
               className="p-3 rounded-lg bg-[#0a0e1a] border border-[#1b243b] hover:border-[#ccff00] text-left transition-all group cursor-pointer"
             >
               <div className="aspect-[16/10] rounded overflow-hidden bg-[#060810] mb-2">
-                <img
+                <GameThumbnail
                   src={og.thumbnail}
                   alt={og.title}
+                  title={og.title}
+                  category={og.category}
+                  compact
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                  onError={(e) => {
-                    (e.target as HTMLElement).style.display = 'none';
-                  }}
                 />
               </div>
               <div className="text-[10px] font-mono text-[#a3e635] uppercase">{og.category}</div>

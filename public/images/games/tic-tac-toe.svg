@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Tic-Tac-Toe Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="tt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0d1324"/>
+    </linearGradient>
+    <pattern id="tt-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="tt-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#tt-bg)"/>
+  <rect width="800" height="500" fill="url(#tt-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- 3x3 Board Backdrop -->
+  <rect x="235" y="65" width="330" height="330" rx="16" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+
+  <!-- Grid Dividers -->
+  <g stroke="#243150" stroke-width="4" stroke-linecap="round">
+    <line x1="345" y1="85" x2="345" y2="375"/>
+    <line x1="455" y1="85" x2="455" y2="375"/>
+    <line x1="255" y1="175" x2="545" y2="175"/>
+    <line x1="255" y1="285" x2="545" y2="285"/>
+  </g>
+
+  <!-- Glowing Electric Lime X Marks (Diagonal Win) -->
+  <g stroke="#ccff00" stroke-width="10" stroke-linecap="round" filter="url(#tt-glow)">
+    <!-- Top-Left X -->
+    <line x1="274" y1="104" x2="318" y2="148"/>
+    <line x1="318" y1="104" x2="274" y2="148"/>
+    <!-- Center X -->
+    <line x1="378" y1="208" x2="422" y2="252"/>
+    <line x1="422" y1="208" x2="378" y2="252"/>
+    <!-- Bottom-Right X -->
+    <line x1="482" y1="312" x2="526" y2="356"/>
+    <line x1="526" y1="312" x2="482" y2="356"/>
+  </g>
+
+  <!-- Glowing Vivid Orange O Marks -->
+  <g fill="none" stroke="#ff5500" stroke-width="9" filter="url(#tt-glow)">
+    <!-- Top-Right O -->
+    <circle cx="504" cy="126" r="24"/>
+    <!-- Bottom-Left O -->
+    <circle cx="296" cy="334" r="24"/>
+  </g>
+
+  <!-- Diagonal Victory Strike Line -->
+  <line x1="262" y1="92" x2="538" y2="368" stroke="#fbfaf6" stroke-width="3" stroke-dasharray="10 6" opacity="0.85"/>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">NEON TIC-TAC-TOE // MINIMAX AI</text>
+</svg>

@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Block Puzzle Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="bp-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0d1426"/>
+    </linearGradient>
+    <pattern id="bp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="bp-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bp-bg)"/>
+  <rect width="800" height="500" fill="url(#bp-grid)"/>
+
+  <!-- Corner Registration Ticks -->
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- 6x5 Board Container -->
+  <rect x="200" y="70" width="400" height="330" rx="14" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+
+  <!-- Empty Matrix Cells -->
+  <g fill="#0f1629" stroke="#1b243b" stroke-width="1.5">
+    <!-- Row 1 -->
+    <rect x="220" y="90" width="52" height="52" rx="6"/>
+    <rect x="282" y="90" width="52" height="52" rx="6"/>
+    <rect x="344" y="90" width="52" height="52" rx="6"/>
+    <rect x="406" y="90" width="52" height="52" rx="6"/>
+    <rect x="468" y="90" width="52" height="52" rx="6"/>
+    <rect x="530" y="90" width="52" height="52" rx="6"/>
+    <!-- Row 2 -->
+    <rect x="220" y="152" width="52" height="52" rx="6"/>
+    <rect x="282" y="152" width="52" height="52" rx="6"/>
+    <rect x="344" y="152" width="52" height="52" rx="6"/>
+    <rect x="406" y="152" width="52" height="52" rx="6"/>
+    <rect x="468" y="152" width="52" height="52" rx="6"/>
+    <rect x="530" y="152" width="52" height="52" rx="6"/>
+    <!-- Row 3 -->
+    <rect x="220" y="214" width="52" height="52" rx="6"/>
+    <rect x="282" y="214" width="52" height="52" rx="6"/>
+    <rect x="344" y="214" width="52" height="52" rx="6"/>
+    <rect x="406" y="214" width="52" height="52" rx="6"/>
+    <rect x="468" y="214" width="52" height="52" rx="6"/>
+    <rect x="530" y="214" width="52" height="52" rx="6"/>
+    <!-- Row 4 -->
+    <rect x="220" y="276" width="52" height="52" rx="6"/>
+    <rect x="282" y="276" width="52" height="52" rx="6"/>
+    <rect x="344" y="276" width="52" height="52" rx="6"/>
+    <rect x="406" y="276" width="52" height="52" rx="6"/>
+    <rect x="468" y="276" width="52" height="52" rx="6"/>
+    <rect x="530" y="276" width="52" height="52" rx="6"/>
+    <!-- Row 5 -->
+    <rect x="220" y="338" width="52" height="52" rx="6"/>
+    <rect x="282" y="338" width="52" height="52" rx="6"/>
+    <rect x="344" y="338" width="52" height="52" rx="6"/>
+    <rect x="406" y="338" width="52" height="52" rx="6"/>
+    <rect x="468" y="338" width="52" height="52" rx="6"/>
+    <rect x="530" y="338" width="52" height="52" rx="6"/>
+  </g>
+
+  <!-- Active Neon Line Clear Beam on Row 3 -->
+  <rect x="214" y="210" width="374" height="60" rx="8" fill="#ccff00" opacity="0.12" filter="url(#bp-glow)"/>
+
+  <!-- Electric Lime L-Polyomino & Full Line -->
+  <g filter="url(#bp-glow)">
+    <rect x="220" y="214" width="52" height="52" rx="6" fill="#ccff00"/>
+    <rect x="282" y="214" width="52" height="52" rx="6" fill="#ccff00"/>
+    <rect x="344" y="214" width="52" height="52" rx="6" fill="#ccff00"/>
+    <rect x="406" y="214" width="52" height="52" rx="6" fill="#ccff00"/>
+    <rect x="468" y="214" width="52" height="52" rx="6" fill="#ccff00"/>
+    <rect x="530" y="214" width="52" height="52" rx="6" fill="#ccff00"/>
+  </g>
+
+  <!-- Inner bevel highlights on lime line -->
+  <g fill="#e8ff80" opacity="0.55">
+    <rect x="226" y="220" width="40" height="8" rx="3"/>
+    <rect x="288" y="220" width="40" height="8" rx="3"/>
+    <rect x="350" y="220" width="40" height="8" rx="3"/>
+    <rect x="412" y="220" width="40" height="8" rx="3"/>
+    <rect x="474" y="220" width="40" height="8" rx="3"/>
+    <rect x="536" y="220" width="40" height="8" rx="3"/>
+  </g>
+
+  <!-- Vivid Orange 2x2 Cube & T-Block -->
+  <g filter="url(#bp-glow)">
+    <rect x="282" y="90" width="52" height="52" rx="6" fill="#ff5500"/>
+    <rect x="344" y="90" width="52" height="52" rx="6" fill="#ff5500"/>
+    <rect x="282" y="152" width="52" height="52" rx="6" fill="#ff5500"/>
+    <rect x="344" y="152" width="52" height="52" rx="6" fill="#ff5500"/>
+
+    <!-- Bottom right L shape -->
+    <rect x="468" y="276" width="52" height="52" rx="6" fill="#ff6600"/>
+    <rect x="468" y="338" width="52" height="52" rx="6" fill="#ff6600"/>
+    <rect x="530" y="338" width="52" height="52" rx="6" fill="#ff6600"/>
+  </g>
+
+  <!-- Warm White Accent Blocks -->
+  <g>
+    <rect x="220" y="338" width="52" height="52" rx="6" fill="#1e293b" stroke="#fbfaf6" stroke-width="1.5"/>
+    <rect x="282" y="338" width="52" height="52" rx="6" fill="#1e293b" stroke="#fbfaf6" stroke-width="1.5"/>
+    <rect x="220" y="276" width="52" height="52" rx="6" fill="#1e293b" stroke="#fbfaf6" stroke-width="1.5"/>
+  </g>
+
+  <!-- Floating Polyomino Preview Left & Right -->
+  <g transform="translate(65,170)" opacity="0.9">
+    <rect x="0" y="0" width="32" height="32" rx="4" fill="#ccff00"/>
+    <rect x="38" y="0" width="32" height="32" rx="4" fill="#ccff00"/>
+    <rect x="38" y="38" width="32" height="32" rx="4" fill="#ccff00"/>
+    <rect x="38" y="76" width="32" height="32" rx="4" fill="#ccff00"/>
+  </g>
+
+  <g transform="translate(655,155)" opacity="0.9">
+    <rect x="0" y="38" width="32" height="32" rx="4" fill="#ff5500"/>
+    <rect x="38" y="0" width="32" height="32" rx="4" fill="#ff5500"/>
+    <rect x="38" y="38" width="32" height="32" rx="4" fill="#ff5500"/>
+    <rect x="76" y="38" width="32" height="32" rx="4" fill="#ff5500"/>
+  </g>
+
+  <!-- Arcade Footer Stamp -->
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">BLOCK PUZZLE // 10×10 MATRIX</text>
+</svg>

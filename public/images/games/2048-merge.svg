@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="2048 Number Merge Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="nm-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0e1427"/>
+    </linearGradient>
+    <pattern id="nm-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="nm-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#nm-bg)"/>
+  <rect width="800" height="500" fill="url(#nm-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- 4x4 Matrix Container -->
+  <rect x="230" y="64" width="340" height="340" rx="16" fill="#0a0e1a" stroke="#1b243b" stroke-width="2"/>
+
+  <!-- Base Empty Slots -->
+  <g fill="#0f1629" stroke="#1b243b" stroke-width="1.5">
+    <rect x="246" y="80" width="72" height="72" rx="8"/>
+    <rect x="326" y="80" width="72" height="72" rx="8"/>
+    <rect x="406" y="80" width="72" height="72" rx="8"/>
+    <rect x="486" y="80" width="72" height="72" rx="8"/>
+
+    <rect x="246" y="160" width="72" height="72" rx="8"/>
+    <rect x="326" y="160" width="72" height="72" rx="8"/>
+    <rect x="406" y="160" width="72" height="72" rx="8"/>
+    <rect x="486" y="160" width="72" height="72" rx="8"/>
+
+    <rect x="246" y="240" width="72" height="72" rx="8"/>
+    <rect x="326" y="240" width="72" height="72" rx="8"/>
+    <rect x="406" y="240" width="72" height="72" rx="8"/>
+    <rect x="486" y="240" width="72" height="72" rx="8"/>
+
+    <rect x="246" y="320" width="72" height="72" rx="8"/>
+    <rect x="326" y="320" width="72" height="72" rx="8"/>
+    <rect x="406" y="320" width="72" height="72" rx="8"/>
+    <rect x="486" y="320" width="72" height="72" rx="8"/>
+  </g>
+
+  <!-- Numbered Tiles -->
+  <!-- 2048 Hero Tile (Electric Lime) -->
+  <g filter="url(#nm-glow)">
+    <rect x="246" y="320" width="72" height="72" rx="8" fill="#ccff00"/>
+    <text x="282" y="364" fill="#060810" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="900" text-anchor="middle">2048</text>
+  </g>
+
+  <!-- 1024 Tile (Vivid Orange) -->
+  <g filter="url(#nm-glow)">
+    <rect x="326" y="320" width="72" height="72" rx="8" fill="#ff5500"/>
+    <text x="362" y="364" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20" font-weight="900" text-anchor="middle">1024</text>
+  </g>
+
+  <!-- 512 Tile -->
+  <rect x="406" y="320" width="72" height="72" rx="8" fill="#1e293b" stroke="#ff6600" stroke-width="2"/>
+  <text x="442" y="364" fill="#ff6600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="800" text-anchor="middle">512</text>
+
+  <!-- 256 Tile -->
+  <rect x="486" y="320" width="72" height="72" rx="8" fill="#151c33" stroke="#a3e635" stroke-width="2"/>
+  <text x="522" y="364" fill="#a3e635" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="800" text-anchor="middle">256</text>
+
+  <!-- Upper Cascade Tiles -->
+  <rect x="326" y="240" width="72" height="72" rx="8" fill="#151c33" stroke="#334155" stroke-width="1.5"/>
+  <text x="362" y="284" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="800" text-anchor="middle">128</text>
+
+  <rect x="406" y="240" width="72" height="72" rx="8" fill="#151c33" stroke="#334155" stroke-width="1.5"/>
+  <text x="442" y="284" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="800" text-anchor="middle">64</text>
+
+  <rect x="326" y="160" width="72" height="72" rx="8" fill="#11182c" stroke="#334155" stroke-width="1.5"/>
+  <text x="362" y="204" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="800" text-anchor="middle">32</text>
+
+  <rect x="486" y="80" width="72" height="72" rx="8" fill="#11182c" stroke="#ccff00" stroke-width="1.5"/>
+  <text x="522" y="124" fill="#ccff00" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="800" text-anchor="middle">16</text>
+
+  <text x="400" y="446" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">2048 MERGE // QUANTUM CORE</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Cyber Flap Midnight Arcade Artwork">
+  <defs>
+    <linearGradient id="cf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060810"/>
+      <stop offset="100%" stop-color="#0d1426"/>
+    </linearGradient>
+    <pattern id="cf-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#151e34" stroke-width="1"/>
+    </pattern>
+    <filter id="cf-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#cf-bg)"/>
+  <rect width="800" height="500" fill="url(#cf-grid)"/>
+  <path d="M24 44 V24 H44 M756 24 H776 V44 M24 456 V476 H44 M756 476 H776 V456" fill="none" stroke="#ccff00" stroke-width="2" opacity="0.55"/>
+
+  <!-- High-Voltage Energy Pylons -->
+  <g stroke="#ccff00" stroke-width="2.5">
+    <!-- Left Pylon Pair -->
+    <rect x="260" y="0" width="66" height="145" rx="6" fill="#0f172a"/>
+    <rect x="252" y="130" width="82" height="22" rx="4" fill="#ccff00"/>
+    <rect x="260" y="295" width="66" height="120" rx="6" fill="#0f172a"/>
+    <rect x="252" y="285" width="82" height="22" rx="4" fill="#ccff00"/>
+
+    <!-- Right Pylon Pair -->
+    <rect x="520" y="0" width="66" height="185" rx="6" fill="#0f172a"/>
+    <rect x="512" y="170" width="82" height="22" rx="4" fill="#ff5500" stroke="#ff5500"/>
+    <rect x="520" y="335" width="66" height="80" rx="6" fill="#0f172a"/>
+    <rect x="512" y="325" width="82" height="22" rx="4" fill="#ff5500" stroke="#ff5500"/>
+  </g>
+
+  <!-- Flight Trajectory Arc -->
+  <path d="M100 245 Q 190 215, 290 220 T 450 250 T 630 258" fill="none" stroke="#fbfaf6" stroke-width="2" stroke-dasharray="7 6" opacity="0.45"/>
+
+  <!-- Ion Exhaust Particle Trail -->
+  <g fill="#ff5500" filter="url(#cf-glow)">
+    <circle cx="152" cy="236" r="10" opacity="0.4"/>
+    <circle cx="176" cy="230" r="12" opacity="0.65"/>
+    <circle cx="204" cy="224" r="14" opacity="0.85"/>
+  </g>
+
+  <!-- Cyber Drone Body -->
+  <g transform="translate(222, 198)" filter="url(#cf-glow)">
+    <polygon points="0,24 24,4 66,14 82,28 60,44 14,40" fill="#ccff00" stroke="#fbfaf6" stroke-width="2.5"/>
+    <polygon points="44,14 68,21 52,32 34,26" fill="#060810"/>
+    <circle cx="56" cy="22" r="4" fill="#ff5500"/>
+    <polygon points="-8,18 6,24 -8,32" fill="#ff5500"/>
+  </g>
+
+  <!-- Floor Horizon Bar -->
+  <line x1="60" y1="415" x2="740" y2="415" stroke="#1b243b" stroke-width="3"/>
+
+  <text x="400" y="456" fill="#fbfaf6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="4" text-anchor="middle">CYBER FLAP // ION FLIGHT</text>
+</svg>
